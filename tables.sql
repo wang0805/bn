@@ -12,27 +12,23 @@ CREATE TABLE IF NOT EXISTS products (
 	created_at TIMESTAMP DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS products (
-	id SERIAL PRIMARY KEY,
-	code TEXT,
-	name TEXT,
-	created_at TIMESTAMP DEFAULT now()
-);
-
-CREATE TABLE IF NOT EXISTS dates (
-	id SERIAL PRIMARY KEY,
-	month TEXT,
-    monthno INT,
-	year INT,
-	created_at TIMESTAMP DEFAULT now()
-);
-
 CREATE TABLE IF NOT EXISTS clients (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
-    gcm_id INT,
+	created_at TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS traders (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+    client_id INT,
+	created_at TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS accounts (
+	id SERIAL PRIMARY KEY,
 	account TEXT,
-    trader TEXT,
+    client_id INT,
 	created_at TIMESTAMP DEFAULT now()
 );
 
@@ -42,3 +38,31 @@ CREATE TABLE IF NOT EXISTS clients_products (
     product_id INT,
 	created_at TIMESTAMP DEFAULT now()
 );
+
+CREATE TABLE IF NOT EXISTS clients_gcms (
+	id SERIAL PRIMARY KEY,
+    gcm_id INT,
+    client_id INT,
+	created_at TIMESTAMP DEFAULT now()
+);
+
+-- CREATE TABLE IF NOT EXISTS transactions (
+-- 	id SERIAL PRIMARY KEY,
+    
+-- 	created_at TIMESTAMP DEFAULT now()
+-- );
+
+-- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
+-- inner join clients_products 
+-- on clients_products.client_id = clients.id
+-- inner join products 
+-- on clients_products.product_id = products.id
+-- inner join clients_gcms
+-- on clients_gcms.client_id = clients.id
+-- inner join gcms
+-- on clients_gcms.gcm_id = gcms.id
+-- inner join accounts
+-- on accounts.client_id = clients.id
+-- inner join traders
+-- on traders.client_id= clients.id
+

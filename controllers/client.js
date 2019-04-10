@@ -6,6 +6,8 @@ module.exports = db => {
         response.sendStatus(500);
       } else {
         console.log("controller index result rows: ", result.rows);
+        console.log(typeof result.rows, "type of ");
+
         response.json(result.rows);
       }
     });
