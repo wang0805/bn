@@ -9,6 +9,7 @@ module.exports = (app, db) => {
 
   // CRUD
   app.get("/api/clients", client.index);
+  app.get("/api/products", client.products);
 };
 
 /*

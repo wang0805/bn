@@ -13,6 +13,18 @@ module.exports = db => {
     });
   };
 
+  const products = (request, response) => {
+    db.client.products((error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        console.log("controller index result rows: ", result.rows);
+        response.json(result.rows);
+      }
+    });
+  };
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -20,6 +32,7 @@ module.exports = db => {
    */
 
   return {
-    index
+    index,
+    products
   };
 };

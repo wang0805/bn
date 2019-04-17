@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS gcms (
 	created_at TIMESTAMP DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS users (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	created_at TIMESTAMP DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS products (
 	id SERIAL PRIMARY KEY,
 	code TEXT,
@@ -15,6 +21,8 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS clients (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
+	commission NUMERIC(5,4),
+	recap_emails TEXT,
 	created_at TIMESTAMP DEFAULT now()
 );
 
@@ -46,11 +54,26 @@ CREATE TABLE IF NOT EXISTS clients_gcms (
 	created_at TIMESTAMP DEFAULT now()
 );
 
--- CREATE TABLE IF NOT EXISTS transactions (
--- 	id SERIAL PRIMARY KEY,
-    
--- 	created_at TIMESTAMP DEFAULT now()
--- );
+CREATE TABLE IF NOT EXISTS transactions (
+	id SERIAL PRIMARY KEY,
+	trade_date DATE NOT NULL DEFAULT CURRENT_DATE,
+	trade_time TIMESTAMP,
+    s_client TEXT,
+	b_client TEXT,
+	s_user INT,
+	b_user INT,
+	s_commission NUMERIC(5,4),
+	b_commission NUMERIC(5,4),
+	price NUMERIC(5,2),
+	product TEXT,
+	qty INT,
+	contract TEXT,
+	fromM TEXT,
+	toM TEXT,
+	year INT,
+	created_by_id INT,
+	created_at TIMESTAMP DEFAULT now()
+);
 
 -- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
 -- inner join clients_products 
