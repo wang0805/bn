@@ -3,6 +3,33 @@ const http = require("http");
 const db = require("./db");
 const bodyParser = require("body-parser");
 
+const Email = require("email-templates");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+/**
+ * ===================================
+ * nodemailer set up
+ * ===================================
+ */
+var transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, //true for 465 and false for other ports, gmail SSL 465 / TLS 587
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  },
+  tls: { rejectUnauthorized: false }
+});
+
+const email = new Email({
+  message: {
+    from: "prawn.memes@gmail.com"
+  },
+  send: true,
+  transport: transporter
+});
 /**
  * ===================================
  * Configurations and set up
@@ -22,6 +49,37 @@ require("./routes")(app, db);
 // Root GET request (it doesn't belong in any controller file)
 app.get("/", (request, response) => {
   response.json([{ test: "Testing please" }]);
+});
+
+app.post("/send", (req, res) => {
+  console.log(req.body);
+  //buyer
+  email
+    .send({
+      template: "buyer",
+      message: {
+        to: req.body.b_recap
+      },
+      locals: {
+        buyer: req.body.b_trader
+      }
+    })
+    .then(console.log("success for buyer"))
+    .catch(console.error);
+  //seller
+  email
+    .send({
+      template: "seller",
+      message: {
+        to: req.body.s_recap
+      },
+      locals: {
+        seller: req.body.s_trader
+      }
+    })
+    .then(console.log("success for seller"))
+    .catch(console.error);
+  res.send("success");
 });
 
 /**

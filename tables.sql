@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS clients_gcms (
 CREATE TABLE IF NOT EXISTS transactions (
 	id SERIAL PRIMARY KEY,
 	trade_date DATE NOT NULL DEFAULT CURRENT_DATE,
-	trade_time TIMESTAMP,
+	trade_time TEXT,
     s_client TEXT,
 	b_client TEXT,
 	s_user INT,
@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 	fromM TEXT,
 	toM TEXT,
 	year INT,
+	deal_id INT,
 	created_by_id INT,
 	created_at TIMESTAMP DEFAULT now()
 );

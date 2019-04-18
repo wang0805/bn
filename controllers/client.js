@@ -5,8 +5,8 @@ module.exports = db => {
         console.log("error", error);
         response.sendStatus(500);
       } else {
-        console.log("controller index result rows: ", result.rows);
-        console.log(typeof result.rows, "type of ");
+        // console.log("controller index result rows: ", result.rows);
+        // console.log(typeof result.rows, "type of ");
 
         response.json(result.rows);
       }

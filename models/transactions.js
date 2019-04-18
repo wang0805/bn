@@ -1,44 +1,32 @@
-module.exports = (dbPoolInstance) => {
+module.exports = dbPoolInstance => {
+  const create = (obj, callback) => {
+    console.log(obj, "objsctsdsdsdsdsdsds");
+    const query =
+      "INSERT INTO transactions ( trade_date, trade_time, s_client, b_client, s_user, b_user, s_commission, b_commission, price, product, qty, contract, year, created_by_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING id;";
 
-	const indexbuy = (userid, callback) => {
-		
-		const queryString = 
-		`SELECT users.id, transactions.b_orderid AS buy_orderid, transactions.price AS price, transactions.qty AS qty, transactions.ticker AS ticker, transactions.created_at AS date FROM transactions
-		INNER JOIN orders 
-		ON (transactions.b_orderid = orders.id)
-		INNER JOIN users
-		ON (orders.user_id = users.id)
-		WHERE orders.user_id = $1;`;
-		const values = [userid];
+    const values = [
+      obj.execDate,
+      obj.execTime,
+      obj.s_client,
+      obj.b_client,
+      1,
+      2,
+      parseFloat(obj.s_comms),
+      parseFloat(obj.b_comms),
+      parseFloat(obj.price),
+      obj.product_code,
+      parseInt(obj.qty),
+      "contract",
+      parseInt(obj.year),
+      1
+    ];
 
-	    dbPoolInstance.query(queryString, values, (error, result) => {
-	    
-	      callback(error, result);
-	  
-	    });
-	};
+    dbPoolInstance.query(query, values, (error, result) => {
+      callback(error, result);
+    });
+  };
 
-	const indexsell = (userid, callback) => {
-		
-		const queryString = 
-		`SELECT users.id, transactions.a_orderid AS sell_orderid, transactions.price AS price, transactions.qty AS qty, transactions.ticker AS ticker, transactions.created_at AS date FROM transactions
-		INNER JOIN orders 
-		ON (transactions.a_orderid = orders.id)
-		INNER JOIN users
-		ON (orders.user_id = users.id)
-		WHERE orders.user_id = $1;`;
-		const values = [userid];
-
-	    dbPoolInstance.query(queryString, values, (error, result) => {
-	    
-	      callback(error, result);
-	  
-	    });
-	};
-
-	return {
-		indexbuy,
-		indexsell
-	};
-
+  return {
+    create
+  };
 };
