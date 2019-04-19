@@ -11,6 +11,7 @@ module.exports = (app, db) => {
   // CRUD
   app.get("/api/clients", client.index);
   app.get("/api/products", client.products);
+  app.get("/api/transactions", transactions.index);
 
   app.post("/api/transactions", transactions.create);
 };

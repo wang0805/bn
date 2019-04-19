@@ -26,6 +26,7 @@ module.exports = dbPoolInstance => {
       callback(error, result);
     });
   };
+
   return {
     index,
     products

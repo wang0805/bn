@@ -11,6 +11,23 @@ module.exports = db => {
     });
   };
 
+  const index = (request, response) => {
+    db.transactions.index((error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        console.log(
+          "controller index result rows of transactions: ",
+          result.rows
+        );
+        // console.log(typeof result.rows, "type of ");
+
+        response.json(result.rows);
+      }
+    });
+  };
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -18,6 +35,7 @@ module.exports = db => {
    */
 
   return {
-    create
+    create,
+    index
   };
 };

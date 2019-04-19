@@ -19,7 +19,7 @@ module.exports = db => {
         console.log("error", error);
         response.sendStatus(500);
       } else {
-        console.log("controller index result rows: ", result.rows);
+        // console.log("controller index result rows: ", result.rows);
         response.json(result.rows);
       }
     });

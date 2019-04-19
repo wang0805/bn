@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 
 const email = new Email({
   message: {
-    from: "prawn.memes@gmail.com"
+    from: '"futuresops" <prawn.memes@gmail.com'
   },
   send: true,
   transport: transporter
@@ -47,13 +47,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("./routes")(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
-app.get("/", (request, response) => {
-  response.json([{ test: "Testing please" }]);
+app.get("/", (req, res) => {
+  res.json([{ test: "Testing please" }]);
 });
 
 app.post("/send", (req, res) => {
-  console.log(req.body);
-  //buyer
+  // console.log(req.body, "req body from /send");
+  // buyer
   email
     .send({
       template: "buyer",
@@ -61,12 +61,19 @@ app.post("/send", (req, res) => {
         to: req.body.b_recap
       },
       locals: {
-        buyer: req.body.b_trader
+        buyer: req.body.b_client,
+        date: req.body.execDate,
+        product_code: req.body.product_code,
+        price: req.body.price,
+        qty: req.body.qty,
+        trader: req.body.b_trader,
+        account: req.body.b_accounts,
+        commission: req.body.b_comms
       }
     })
     .then(console.log("success for buyer"))
     .catch(console.error);
-  //seller
+  // seller
   email
     .send({
       template: "seller",
@@ -74,12 +81,19 @@ app.post("/send", (req, res) => {
         to: req.body.s_recap
       },
       locals: {
-        seller: req.body.s_trader
+        seller: req.body.s_client,
+        date: req.body.execDate,
+        product_code: req.body.product_code,
+        price: req.body.price,
+        qty: req.body.qty,
+        trader: req.body.s_trader,
+        account: req.body.s_accounts,
+        commission: req.body.s_comms
       }
     })
     .then(console.log("success for seller"))
     .catch(console.error);
-  res.send("success");
+  res.send("success in sending mail");
 });
 
 /**
