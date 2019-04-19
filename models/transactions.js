@@ -19,7 +19,7 @@ module.exports = dbPoolInstance => {
       parseFloat(obj.price),
       obj.product_code,
       parseInt(obj.qty),
-      "contract",
+      obj.contract,
       parseInt(obj.year),
       1
     ];
