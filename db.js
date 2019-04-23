@@ -1,6 +1,7 @@
 const pg = require("pg");
 const client = require("./models/client");
 const transactions = require("./models/transactions");
+const users = require("./models/users");
 const url = require("url");
 
 var configs;
@@ -38,6 +39,7 @@ module.exports = {
    */
   client: client(pool),
   transactions: transactions(pool),
+  users: users(pool),
 
   //make queries directly from here
   queryInterface: (text, params, callback) => {

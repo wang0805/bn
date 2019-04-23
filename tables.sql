@@ -5,12 +5,6 @@ CREATE TABLE IF NOT EXISTS gcms (
 	created_at TIMESTAMP DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS users (
-	id SERIAL PRIMARY KEY,
-	name TEXT,
-	created_at TIMESTAMP DEFAULT now()
-);
-
 CREATE TABLE IF NOT EXISTS products (
 	id SERIAL PRIMARY KEY,
 	code TEXT,
@@ -75,6 +69,14 @@ CREATE TABLE IF NOT EXISTS transactions (
 	s_user INT,
 	b_user INT,
 	created_by_id INT,
+	created_at TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS users (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	password TEXT,
+	permissions TEXT [],
 	created_at TIMESTAMP DEFAULT now()
 );
 

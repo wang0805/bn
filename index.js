@@ -43,12 +43,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use(guard.check("user"));
+
 //import routes calling on db
 require("./routes")(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
 app.get("/", (req, res) => {
-  res.json([{ test: "Testing please" }]);
+  res.json([{ TEST: "TESTING ROUTES" }]);
 });
 
 app.post("/send", (req, res) => {
