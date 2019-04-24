@@ -37,8 +37,17 @@ module.exports = dbPoolInstance => {
     });
   };
 
+  const indexDay = callback => {
+    const query = `SELECT * from transactions where trade_date = current_date;`;
+
+    dbPoolInstance.query(query, (error, result) => {
+      callback(error, result);
+    });
+  };
+
   return {
     create,
-    index
+    index,
+    indexDay
   };
 };

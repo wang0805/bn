@@ -11,11 +11,11 @@ module.exports = db => {
     });
   };
 
-  const index = (request, response) => {
+  const index = (req, res) => {
     db.transactions.index((error, result) => {
       if (error) {
         console.log("error", error);
-        response.sendStatus(500);
+        res.sendStatus(500);
       } else {
         // console.log(
         //   "controller index result rows of transactions: ",
@@ -23,7 +23,24 @@ module.exports = db => {
         // );
         // console.log(typeof result.rows, "type of ");
 
-        response.json(result.rows);
+        res.json(result.rows);
+      }
+    });
+  };
+
+  const indexDay = (req, res) => {
+    db.transactions.indexDay((error, result) => {
+      if (error) {
+        console.log("error", error);
+        res.sendStatus(500);
+      } else {
+        // console.log(
+        //   "controller index result rows of transactions: ",
+        //   result.rows
+        // );
+        // console.log(typeof result.rows, "type of ");
+
+        res.json(result.rows);
       }
     });
   };
@@ -36,6 +53,7 @@ module.exports = db => {
 
   return {
     create,
-    index
+    index,
+    indexDay
   };
 };
