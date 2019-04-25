@@ -25,11 +25,13 @@ module.exports = (app, db) => {
     "/api/transactions",
     middleware.checkToken,
     guard.check("user"),
-    transactions.indexDay
+    transactions.index
   );
   app.get("/api/users", users.index);
+  app.get("/api/transactions/:id", transactions.edit);
 
   app.post("/api/transactions", transactions.create);
+  app.post("/api/transactions/:id", transactions.update);
   app.post("/users/create", users.create);
   app.post("/users/logout", users.logout);
 };

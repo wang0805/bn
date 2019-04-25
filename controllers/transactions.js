@@ -45,6 +45,35 @@ module.exports = db => {
     });
   };
 
+  const edit = (request, response) => {
+    //let user_id = request.cookies.user_id;
+    let trade_id = request.params.id;
+
+    db.transactions.edit(trade_id, (error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        response.json(result.rows[0]);
+        // console.log("results of edit", result.rows[0]);
+      }
+    });
+  };
+
+  const update = (req, response) => {
+    //let user_id = request.cookies.user_id;
+
+    db.transactions.update(req.body, (error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        response.json(result.rows[0]);
+        // console.log("results of edit", result.rows[0]);
+      }
+    });
+  };
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -54,6 +83,8 @@ module.exports = db => {
   return {
     create,
     index,
-    indexDay
+    indexDay,
+    edit,
+    update
   };
 };

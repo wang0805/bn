@@ -1,7 +1,7 @@
 module.exports = dbPoolInstance => {
   const create = (obj, callback) => {
     const query =
-      "INSERT INTO transactions ( trade_date, trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, s_commission, b_commission, price, product, qty, contract, year, created_by_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING id;";
+      "INSERT INTO transactions ( trade_date, trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING id;";
 
     const values = [
       obj.execDate,
@@ -16,6 +16,8 @@ module.exports = dbPoolInstance => {
       2,
       parseFloat(obj.s_comms),
       parseFloat(obj.b_comms),
+      obj.s_idb,
+      obj.b_idb,
       parseFloat(obj.price),
       obj.product_code,
       parseInt(obj.qty),
@@ -45,9 +47,31 @@ module.exports = dbPoolInstance => {
     });
   };
 
+  const edit = (tradeid, callback) => {
+    const query = `SELECT * from transactions WHERE id=$1;`;
+
+    values = [tradeid];
+
+    dbPoolInstance.query(query, values, (error, result) => {
+      callback(error, result);
+    });
+  };
+
+  const update = (obj, callback) => {
+    const query = `update transactions SET deal_id=$1 WHERE id=$2;`;
+
+    values = [obj.dealid, obj.tradeid];
+
+    dbPoolInstance.query(query, values, (error, result) => {
+      callback(error, result);
+    });
+  };
+
   return {
     create,
     index,
-    indexDay
+    indexDay,
+    edit,
+    update
   };
 };

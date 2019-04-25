@@ -60,7 +60,8 @@ module.exports = db => {
           res.json({
             success: true,
             message: "Authentication successful!",
-            token: token
+            token: token,
+            user_id: result.rows[0].id
           });
         } else {
           res.json({

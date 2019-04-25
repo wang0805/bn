@@ -50,12 +50,14 @@ CREATE TABLE IF NOT EXISTS clients_gcms (
 
 CREATE TABLE IF NOT EXISTS transactions (
 	id SERIAL PRIMARY KEY,
-	trade_date DATE NOT NULL DEFAULT CURRENT_DATE,
+	trade_date DATE NOT NULL,
 	trade_time TEXT,
     s_client TEXT,
 	b_client TEXT,
 	s_account TEXT,
 	b_account TEXT,
+	s_idb TEXT,
+	b_idb TEXT,
 	s_trader TEXT,
 	b_trader TEXT,
 	s_commission NUMERIC(5,4),
