@@ -32,7 +32,9 @@ module.exports = dbPoolInstance => {
   };
 
   const index = callback => {
-    const query = `SELECT * from transactions;`;
+    const query = `SELECT transactions.id AS trade_id, transactions.product, transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
+    inner join users
+    on users.id = transactions.created_by_id;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
@@ -40,7 +42,10 @@ module.exports = dbPoolInstance => {
   };
 
   const indexDay = callback => {
-    const query = `SELECT * from transactions where trade_date = current_date;`;
+    const query = `SELECT transactions.id AS trade_id, transactions.trade_date, transactions.trade_time, transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
+    inner join users
+    on users.id = transactions.created_by_id 
+    where transactions.trade_date = current_date;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);

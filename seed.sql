@@ -1,5 +1,5 @@
--- INSERT INTO clients (name, commission, recap_emails) VALUES ('Theme international', 0.0020, 'cj@tits.com;dc@tits.com');
--- INSERT INTO clients (name, commission, recap_emails) VALUES ('HNK Alpha', 0.0020, 'chris@hnk.com;henky@hnk.com');
+-- INSERT INTO clients (name, commission, idb, recap_emails) VALUES ('Theme international', 0.0200, 'S664','cj@tits.com;dc@tits.com');
+-- INSERT INTO clients (name, commission, idb, recap_emails) VALUES ('HNK Alpha', 0.0200, 'S664', 'chris@hnk.com;henky@hnk.com');
 
 -- INSERT INTO gcms (code, name) VALUES ('S188', 'UOB Bullion & Futures Ltd');
 -- INSERT INTO gcms (code, name) VALUES ('328', 'UBS Futures Singapore ltd');
