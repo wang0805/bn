@@ -27,8 +27,8 @@
 -- INSERT INTO users (name, password, permissions) VALUES ("wwh", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", [user, admin])
 -- INSERT INTO users (name, password, permissions) VALUES ("bm", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", ["user"])
 
-INSERT INTO instruments (code, name) VALUES ('F', 'Futures');
-INSERT INTO instruments (code, name) VALUES ('S', 'Swaps');
-INSERT INTO instruments (code, name) VALUES ('C', 'Call Options');
-INSERT INTO instruments (code, name) VALUES ('P', 'Put Options');
+-- INSERT INTO instruments (code, name) VALUES ('F', 'Futures');
+-- INSERT INTO instruments (code, name) VALUES ('S', 'Swaps');
+-- INSERT INTO instruments (code, name) VALUES ('C', 'Call Options');
+-- INSERT INTO instruments (code, name) VALUES ('P', 'Put Options');
 
