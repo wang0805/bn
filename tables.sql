@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS clients (
 	name TEXT,
 	address TEXT,
 	entity TEXT,
-
 	idb TEXT,
 	commission NUMERIC(5,4),
 	recap_emails TEXT,
+	invoice_emails TEXT,
 	created_at TIMESTAMP DEFAULT now()
 );
 
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS transactions (
 	instrument TEXT,
 	year INT,
 	deal_id INT,
-	s_user INT,
-	b_user INT,
+	s_user TEXT,
+	b_user TEXT,
 	created_by_id INT,
 	created_at TIMESTAMP DEFAULT now()
 );
