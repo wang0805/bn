@@ -8,6 +8,9 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS clients (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
+	address TEXT,
+	entity TEXT,
+
 	idb TEXT,
 	commission NUMERIC(5,4),
 	recap_emails TEXT,
@@ -39,6 +42,8 @@ CREATE TABLE IF NOT EXISTS transactions (
 	trade_date DATE NOT NULL,
 	trade_time TEXT,
     s_client TEXT,
+	s_clientid INT,
+	b_clientid INT,
 	b_client TEXT,
 	s_account TEXT,
 	b_account TEXT,
