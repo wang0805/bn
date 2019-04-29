@@ -39,8 +39,17 @@ module.exports = dbPoolInstance => {
     });
   };
 
+  const instruments = callback => {
+    const query = `SELECT * from instruments;`;
+
+    dbPoolInstance.query(query, (error, result) => {
+      callback(error, result);
+    });
+  };
+
   return {
     index,
-    products
+    products,
+    instruments
   };
 };

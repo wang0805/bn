@@ -25,6 +25,18 @@ module.exports = db => {
     });
   };
 
+  const instruments = (request, response) => {
+    db.client.instruments((error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        // console.log("controller index result rows: ", result.rows);
+        response.json(result.rows);
+      }
+    });
+  };
+
   /**
    * ===========================================
    * Export controller functions as a module
@@ -33,6 +45,7 @@ module.exports = db => {
 
   return {
     index,
-    products
+    products,
+    instruments
   };
 };

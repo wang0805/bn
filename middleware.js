@@ -18,7 +18,7 @@ let checkToken = (req, res, next) => {
         });
       } else {
         req.decoded = decoded;
-        console.log("decoded", decoded);
+        // console.log("decoded", decoded);
         req.user = {
           permissions: decoded.permissions
         };

@@ -1,4 +1,4 @@
-const middleware = require("../backend/middleware");
+const middleware = require("./middleware");
 const guard = require("express-jwt-permissions")();
 
 module.exports = (app, db) => {
@@ -21,6 +21,8 @@ module.exports = (app, db) => {
     client.index
   );
   app.get("/api/products", client.products);
+  app.get("/api/instruments", client.instruments);
+
   app.get(
     "/api/transactions",
     middleware.checkToken,

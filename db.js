@@ -22,10 +22,12 @@ if (process.env.DATABASE_URL) {
   };
 } else {
   configs = {
-    user: "BPI",
-    password: process.env.DB_PASSWORD,
+    // user: "BPI",
+    user: "wenhao",
+    // password: process.env.DB_PASSWORD,
     host: "127.0.0.1",
-    database: "BPI",
+    database: "wenhao",
+    // database: "BPI",
     port: 5432
   };
 }

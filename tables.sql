@@ -28,6 +28,11 @@ CREATE TABLE IF NOT EXISTS accounts (
 	created_at TIMESTAMP DEFAULT now()
 );
 
+CREATE TABLE IF NOT EXISTS instruments (
+	id SERIAL PRIMARY KEY,
+	code TEXT,
+	name TEXT
+);
 
 CREATE TABLE IF NOT EXISTS transactions (
 	id SERIAL PRIMARY KEY,
@@ -44,9 +49,11 @@ CREATE TABLE IF NOT EXISTS transactions (
 	s_commission NUMERIC(5,4),
 	b_commission NUMERIC(5,4),
 	price NUMERIC(5,2),
+	strike NUMERIC(5,2),
 	product TEXT,
 	qty INT,
 	contract TEXT,
+	instrument TEXT,
 	year INT,
 	deal_id INT,
 	s_user INT,
