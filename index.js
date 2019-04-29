@@ -13,9 +13,9 @@ require("dotenv").config();
  * ===================================
  */
 var transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, //true for 465 and false for other ports, gmail SSL 465 / TLS 587
+  host: "smtp-mail.outlook.com",
+  port: 587,
+  secure: false, //true for 465 and false for other ports, gmail SSL 465 / TLS 587
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 
 const email = new Email({
   message: {
-    from: '"futuresops" <prawn.memes@gmail.com'
+    from: '"futuresops" <whwang@bpifinancial.com>'
   },
   send: true,
   transport: transporter

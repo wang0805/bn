@@ -1,11 +1,6 @@
 -- INSERT INTO clients (name, commission, idb, recap_emails) VALUES ('Theme international', 0.0200, 'S664','cj@tits.com;dc@tits.com');
 -- INSERT INTO clients (name, commission, idb, recap_emails) VALUES ('HNK Alpha', 0.0200, 'S664', 'chris@hnk.com;henky@hnk.com');
 
--- INSERT INTO gcms (code, name) VALUES ('S188', 'UOB Bullion & Futures Ltd');
--- INSERT INTO gcms (code, name) VALUES ('328', 'UBS Futures Singapore ltd');
--- INSERT INTO gcms (code, name) VALUES ('S009', 'SG Securities (Singapore) pte ltd');
--- INSERT INTO gcms (code, name) VALUES ('S020', 'Philips Futures Pte Ltd');
-
 -- INSERT INTO accounts (account, client_id) VALUES ('SG S188 601011CJ', 1);
 -- INSERT INTO accounts (account, client_id) VALUES ('SG S188 601011DC', 1);
 -- INSERT INTO accounts (account, client_id) VALUES ('SG S188 601011ZX', 1);
@@ -28,3 +23,6 @@
 -- INSERT INTO clients_products (client_id, product_id) VALUES (2,1);
 -- INSERT INTO clients_products (client_id, product_id) VALUES (2,2);
 -- INSERT INTO clients_gcms (gcm_id, client_id) VALUES (1,2);
+
+-- INSERT INTO users (name, password, permissions) VALUES ("wwh", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", [user, admin])
+-- INSERT INTO users (name, password, permissions) VALUES ("bm", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", ["user"])

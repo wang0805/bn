@@ -1,4 +1,4 @@
-const middleware = require("../bpibackend/middleware");
+const middleware = require("../backend/middleware");
 const guard = require("express-jwt-permissions")();
 
 module.exports = (app, db) => {

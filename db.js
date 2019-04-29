@@ -4,6 +4,8 @@ const transactions = require("./models/transactions");
 const users = require("./models/users");
 const url = require("url");
 
+require("dotenv").config();
+
 var configs;
 
 if (process.env.DATABASE_URL) {
@@ -20,9 +22,10 @@ if (process.env.DATABASE_URL) {
   };
 } else {
   configs = {
-    user: "wenhao",
+    user: "BPI",
+    password: process.env.DB_PASSWORD,
     host: "127.0.0.1",
-    database: "wenhao",
+    database: "BPI",
     port: 5432
   };
 }
