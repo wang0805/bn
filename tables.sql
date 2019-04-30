@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS clients (
 	commission NUMERIC(5,4),
 	recap_emails TEXT,
 	invoice_emails TEXT,
+	invoice_freq INT,
 	created_at TIMESTAMP DEFAULT now()
 );
 
