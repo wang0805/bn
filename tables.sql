@@ -76,6 +76,9 @@ CREATE TABLE IF NOT EXISTS users (
 	created_at TIMESTAMP DEFAULT now()
 );
 
+ALTER TABLE traders ADD COLUMN telephone int;
+ALTER TABLE clients ADD COLUMN telephone int;
+
 -- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
 -- inner join clients_products 
 -- on clients_products.client_id = clients.id
