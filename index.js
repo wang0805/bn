@@ -56,6 +56,13 @@ app.get("/", (req, res) => {
 app.post("/send", (req, res) => {
   // console.log(req.body, "req body from /send");
   // buyer
+  let size = 0;
+  if (req.body.instrument === "S") {
+    size = req.body.qty * 500;
+  } else {
+    size = req.body.qty * 100;
+  }
+
   email
     .send({
       template: "buyer",
@@ -71,6 +78,7 @@ app.post("/send", (req, res) => {
         strike: req.body.strike,
         instrument: req.body.instrument,
         qty: req.body.qty,
+        size: size,
         trader: req.body.b_trader,
         account: req.body.b_accounts,
         commission: req.body.b_comms
@@ -94,6 +102,7 @@ app.post("/send", (req, res) => {
         strike: req.body.strike,
         instrument: req.body.instrument,
         qty: req.body.qty,
+        size: size,
         trader: req.body.s_trader,
         account: req.body.s_accounts,
         commission: req.body.s_comms
