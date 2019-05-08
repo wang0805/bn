@@ -6,7 +6,8 @@ module.exports = db => {
         console.error("error: ", error);
         response.sendStatus(500);
       } else {
-        response.send("success inserting into transactions!");
+        response.json(result.rows);
+        // response.send("success inserting into transactions!");
       }
     });
   };

@@ -63,6 +63,11 @@ app.post("/send", (req, res) => {
     size = req.body.qty * 100;
   }
 
+  let strike = "N/A";
+  if (req.body.strike) {
+    strike = `USD${req.body.strike}`;
+  }
+
   email
     .send({
       template: "buyer",
@@ -70,12 +75,13 @@ app.post("/send", (req, res) => {
         to: req.body.b_recap
       },
       locals: {
+        tradeid: req.body.tradeid,
         buyer: req.body.b_client,
         date: req.body.execDate,
         product_code: req.body.product_code,
         contract: req.body.contract,
         price: req.body.price,
-        strike: req.body.strike,
+        strike: strike,
         instrument: req.body.instrument,
         qty: req.body.qty,
         size: size,
@@ -94,12 +100,13 @@ app.post("/send", (req, res) => {
         to: req.body.s_recap
       },
       locals: {
+        tradeid: req.body.tradeid,
         seller: req.body.s_client,
         date: req.body.execDate,
         product_code: req.body.product_code,
         contract: req.body.contract,
         price: req.body.price,
-        strike: req.body.strike,
+        strike: strike,
         instrument: req.body.instrument,
         qty: req.body.qty,
         size: size,
