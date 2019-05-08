@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 
 const email = new Email({
   message: {
-    from: '"futuresops" <whwang@bpifinancial.com>'
+    from: '"futuresops" <operations@bpifinancial.com>'
   },
   send: true,
   transport: transporter
