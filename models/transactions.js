@@ -1,6 +1,5 @@
 module.exports = dbPoolInstance => {
   const create = (obj, callback) => {
-    console.log(obj, obj.execDate, "date pls");
     const query = `INSERT INTO transactions ( s_clientid, b_clientid, strike, instrument, trade_date, 
         trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
         s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id) 
