@@ -27,7 +27,7 @@ module.exports = (app, db) => {
     "/api/transactions",
     middleware.checkToken,
     guard.check("user"),
-    transactions.index
+    transactions.indexDay
   );
   app.get("/api/users", users.index);
   app.get("/api/transactions/:id", transactions.edit);

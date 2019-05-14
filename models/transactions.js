@@ -1,7 +1,11 @@
 module.exports = dbPoolInstance => {
   const create = (obj, callback) => {
-    const query =
-      "INSERT INTO transactions ( s_clientid, b_clientid, strike, instrument, trade_date, trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) RETURNING id;";
+    console.log(obj, obj.execDate, "date pls");
+    const query = `INSERT INTO transactions ( s_clientid, b_clientid, strike, instrument, trade_date, 
+        trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
+        s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, 
+          $18, $19, $20, $21, $22, $23, $24) RETURNING id;`;
 
     const values = [
       obj.s_client_id,
@@ -36,9 +40,14 @@ module.exports = dbPoolInstance => {
   };
 
   const index = callback => {
-    const query = `SELECT transactions.id AS trade_id, transactions.strike, transactions.instrument, transactions.product, transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
+    const query = `SELECT transactions.id AS trade_id, transactions.strike, transactions.instrument, transactions.product, 
+    transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, 
+    transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, 
+    transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, 
+    transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
     inner join users
-    on users.id = transactions.created_by_id;`;
+    on users.id = transactions.created_by_id
+    ORDER BY trade_id DESC;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
@@ -46,10 +55,15 @@ module.exports = dbPoolInstance => {
   };
 
   const indexDay = callback => {
-    const query = `SELECT transactions.id AS trade_id, transactions.trade_date, transactions.trade_time, transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
+    const query = `SELECT transactions.id AS trade_id, transactions.trade_date, transactions.trade_time, transactions.product, 
+    transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, transactions.s_trader, 
+    transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, 
+    transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, 
+    users.name AS created_by from transactions 
     inner join users
     on users.id = transactions.created_by_id 
-    where transactions.trade_date = current_date;`;
+    where transactions.trade_date = current_date
+    ORDER BY trade_id ASC;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
