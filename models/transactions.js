@@ -30,7 +30,7 @@ module.exports = dbPoolInstance => {
       parseInt(obj.qty),
       obj.contract,
       parseInt(obj.year),
-      1
+      obj.created_byid
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
