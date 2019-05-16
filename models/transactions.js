@@ -40,7 +40,7 @@ module.exports = dbPoolInstance => {
   };
 
   const index = callback => {
-    const query = `SELECT transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.product, 
+    const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.product, 
     transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, 
     transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, 
     transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, 
@@ -55,7 +55,7 @@ module.exports = dbPoolInstance => {
   };
 
   const indexDay = callback => {
-    const query = `SELECT transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
+    const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
     transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, 
     transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, 
     transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, 
