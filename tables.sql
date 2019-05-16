@@ -42,7 +42,7 @@
 -- 	id SERIAL PRIMARY KEY,
 -- 	trade_date DATE NOT NULL,
 -- 	trade_time TEXT,
---     s_client TEXT,
+--  s_client TEXT,
 -- 	s_clientid INT,
 -- 	b_clientid INT,
 -- 	b_client TEXT,
@@ -78,7 +78,8 @@
 
 -- ALTER TABLE traders ADD COLUMN telephone int;
 -- ALTER TABLE clients ADD COLUMN telephone int;
--- ALTER TABLE transactions ADD COLUMN remarks TEXT;
+ALTER TABLE transactions ADD COLUMN consMonth INT;
+
 
 -- ALTER TABLE transactions ALTER COLUMN price TYPE NUMERIC(6,3);
 
