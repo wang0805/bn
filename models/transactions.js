@@ -1,12 +1,13 @@
 module.exports = dbPoolInstance => {
   const create = (obj, callback) => {
-    const query = `INSERT INTO transactions ( s_clientid, b_clientid, strike, instrument, trade_date, 
+    const query = `INSERT INTO transactions ( consmonth, s_clientid, b_clientid, strike, instrument, trade_date, 
         trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
         s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, 
-          $18, $19, $20, $21, $22, $23, $24) RETURNING id;`;
+          $18, $19, $20, $21, $22, $23, $24, $25) RETURNING id;`;
 
     const values = [
+      obj.consMonth,
       obj.s_client_id,
       obj.b_client_id,
       parseFloat(obj.strike),

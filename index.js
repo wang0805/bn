@@ -58,9 +58,9 @@ app.post("/send", (req, res) => {
   // buyer
   let size = 0;
   if (req.body.instrument === "S") {
-    size = req.body.qty * 500;
+    size = req.body.qty * 500 * parseInt(req.body.consMonth);
   } else {
-    size = req.body.qty * 100;
+    size = req.body.qty * 100 * parseInt(req.body.consMonth);
   }
 
   let strike = "N/A";
