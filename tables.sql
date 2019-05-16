@@ -80,6 +80,7 @@
 -- ALTER TABLE clients ADD COLUMN telephone int;
 -- ALTER TABLE transactions ADD COLUMN remarks TEXT;
 
+-- ALTER TABLE transactions ALTER COLUMN price TYPE NUMERIC(6,3);
 
 
 -- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
