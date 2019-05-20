@@ -2,6 +2,10 @@ const express = require("express");
 const http = require("http");
 const db = require("./db");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+const pdf = require("html-pdf");
+
+const pdfTemplate = require("./documents");
 
 const Email = require("email-templates");
 const nodemailer = require("nodemailer");
@@ -40,6 +44,7 @@ const email = new Email({
 const app = express();
 
 // Set up middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -51,6 +56,22 @@ require("./routes")(app, db);
 // Root GET request (it doesn't belong in any controller file)
 app.get("/", (req, res) => {
   res.json([{ TEST: "TESTING ROUTES" }]);
+});
+
+app.post("/createpdf", (req, res) => {
+  // console.log(req.body, "request body, for create pdf");
+  pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", err => {
+    if (err) {
+      return Promise.reject();
+    }
+    console.log("file building");
+    //to be used in client side
+    return Promise.resolve();
+  });
+});
+
+app.get("/getpdf", (req, res) => {
+  res.sendFile(`${__dirname}/result.pdf`);
 });
 
 app.post("/send", (req, res) => {
