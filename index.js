@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const pdf = require("html-pdf");
 
-const pdfTemplate = require("./documents");
+const pdfTemplateHk = require("./documents/hk.js");
+const pdfTemplateSg = require("./documents/sg.js");
 
 const Email = require("email-templates");
 const nodemailer = require("nodemailer");
@@ -54,17 +55,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("./routes")(app, db);
 
 app.post("/createpdf", (req, res) => {
-  // console.log(req.body, "request body, for create pdf");
   let options = {
     orientation: "landscape",
     format: "A4",
     border: {
-      top: "1.5cm", // default is 0, units: mm, cm, in, px
+      top: "1.5cm",
       right: "1cm",
       bottom: "0.5cm",
       left: "1cm"
     },
-    paginationOffset: 1, // Override the initial pagination number
+    paginationOffset: 1,
     header: {
       height: "30mm",
       contents: `
@@ -76,23 +76,32 @@ app.post("/createpdf", (req, res) => {
     footer: {
       height: "15mm",
       contents: {
-        first: "1",
-        2: "2", // Any page number is working. 1-based index
-        3: "3",
-        default:
-          '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-        last: "Last"
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>"
       }
     },
     base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
   };
-  pdf.create(pdfTemplate(req.body), options).toFile("result.pdf", err => {
-    if (err) {
-      res.send(Promise.reject());
-    }
-    //to be used in client side
-    res.send(Promise.resolve());
-  });
+  if (req.body.client[0].entity === "SG") {
+    pdf.create(pdfTemplateSg(req.body), options).toFile("result.pdf", err => {
+      if (err) {
+        res.send(Promise.reject());
+      }
+      res.send(Promise.resolve()); //,then in client side
+    });
+  } else if (req.body.client[0].entity === "HK") {
+    pdf.create(pdfTemplateHk(req.body), options).toFile("result.pdf", err => {
+      if (err) {
+        res.send(Promise.reject());
+      }
+      res.send(Promise.resolve());
+    });
+  } else {
+    res.send(Promise.reject());
+  }
 });
 
 app.get("/getpdf", (req, res) => {
