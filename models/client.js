@@ -20,7 +20,7 @@ module.exports = dbPoolInstance => {
   // };
 
   const index = callback => {
-    const query = `SELECT clients.id, clients.idb, clients.commission AS commission, clients.name AS client_name, clients.recap_emails AS recap_emails, accounts.account, traders.name AS trader_name from clients
+    const query = `SELECT clients.id, clients.address, clients.invoice_emails, clients.idb, clients.commission AS commission, clients.name AS client_name, clients.recap_emails AS recap_emails, accounts.account, traders.name AS trader_name from clients
     inner join accounts
     on accounts.client_id = clients.id
     inner join traders

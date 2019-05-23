@@ -53,20 +53,45 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //import routes calling on db
 require("./routes")(app, db);
 
-// Root GET request (it doesn't belong in any controller file)
-app.get("/", (req, res) => {
-  res.json([{ TEST: "TESTING ROUTES" }]);
-});
-
 app.post("/createpdf", (req, res) => {
   // console.log(req.body, "request body, for create pdf");
-  pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", err => {
+  let options = {
+    orientation: "landscape",
+    format: "A4",
+    border: {
+      top: "1.5cm", // default is 0, units: mm, cm, in, px
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1, // Override the initial pagination number
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES(SG) PTE LTD</div>
+      <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S)079909 TEL: (65) 64990618</div>
+      <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
+      `
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "1",
+        2: "2", // Any page number is working. 1-based index
+        3: "3",
+        default:
+          '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+        last: "Last"
+      }
+    },
+    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+  };
+  pdf.create(pdfTemplate(req.body), options).toFile("result.pdf", err => {
     if (err) {
-      return Promise.reject();
+      res.send(Promise.reject());
     }
-    console.log("file building");
     //to be used in client side
-    return Promise.resolve();
+    res.send(Promise.resolve());
   });
 });
 
@@ -139,6 +164,11 @@ app.post("/send", (req, res) => {
     .then(console.log("success for seller"))
     .catch(console.error);
   res.send("success in sending mail");
+});
+
+// Root GET request (it doesn't belong in any controller file)
+app.get("/", (req, res) => {
+  res.json([{ TEST: "TESTING ROUTES" }]);
 });
 
 /**
