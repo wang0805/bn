@@ -1,10 +1,12 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
-module.exports = data => {
+module.exports = datas => {
   const today = new Date();
   let total = 0;
-  for (let i = 0; i < data.length; i++) {
-    total += data[i].tcomms;
+  for (let i = 0; i < datas.client.length; i++) {
+    total += datas.client[i].tcomms;
   }
+  let sgd = Math.round(total * datas.exrate * 100) / 100;
+
   return `
     <!doctype html>
     <html>
@@ -12,6 +14,11 @@ module.exports = data => {
           <meta charset="utf-8">
           <title>PDF Result Template</title>
           <style>
+            .bankdets {
+               line-height: 12px;
+               margin: 0px 0px;
+               padding: 0px 0px;
+            }
              .invoice-box {
              max-width: 800px;
              margin: auto;
@@ -21,8 +28,8 @@ module.exports = data => {
              font-family: 'Helvetica Neue', 'Helvetica';
              color: #555;
              }
-             .justify-center {
-             text-align: right;
+             .justify-left {
+             text-align: left;
              }
              .invoice-box table {
              width: 100%;
@@ -55,30 +62,33 @@ module.exports = data => {
           <table cellpadding="0" cellspacing="0">
              <table cellpadding="0" cellspacing="0">
                 <tr class="information">
-                   <td colspan="9">
+                   <td colspan="10">
                       <table>
                          <tr>
                             <td style="text-align: left;">
-                               Customer name: ${data[0].client}
+                              <strong style="font-size: 12px;">${
+                                datas.client[0].client
+                              }</strong>
                             </td>
                             <td style="text-align: left;">
-                               Receipt number: id
+                               Invoice No: ${datas.invoiceNo}
                             </td>
                          </tr>
                          <tr>
                          <td style="text-align: left;">
-                           Address: ${data[0].address}
+                           Address: ${datas.client[0].address}
                          </td>
                          <td style="text-align: left;">
                             Date: ${`${today.getDate()}/${today.getMonth() +
                               1}/${today.getFullYear()}`}
                          </td>
-                      </tr>
+                        </tr>
                       </table>
                    </td>
                 </tr>
                 <tr class="heading">
                   <td>Trade Id</td>
+                  <td>Deal Id</td>
                   <td>Trade date</td>
                   <td>Product</td>
                   <td>Instrument</td>
@@ -88,11 +98,12 @@ module.exports = data => {
                   <td>Comms Rate</td>
                   <td>Total Comms</td>
                </tr>
-                  ${data
+                  ${datas.client
                     .map(
                       row => `
                   <tr class="item">
                      <td>${row.id}</td>
+                     <td>${row.deal_id}</td>
                      <td>${row.trade_date}</td>
                      <td>${row.product}</td>
                      <td>${row.instrument}</td>
@@ -105,9 +116,34 @@ module.exports = data => {
                   `
                     )
                     .join(" ")}
+               <tr>
+                  <td rowspan="3"></td>
+                  <td colspan="7"><strong style="font-size: 10px;">Total</strong></td>
+                  <td/>
+                  <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total}</strong></td>      
+               </tr>
              </table>
              <br />
-             <h1 class="justify-center">Total Commission: USD ${total}</h1>
+             <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
+             <div class="justify-left bankdets">
+             Payment by TT:
+             <br/>
+             Beneficiary name          Bright Point International Futures (SG) Pte Ltd
+             <br/>
+             Beneficiary back          United Overseas Bank Limited, Singapore
+             <br/>
+             Beneficiary Account No.   451-907-917-2
+             <br/>
+             Currency                  USD
+             <br/>
+             Swift code                UOVBSGSGXXX
+             <br/>
+             Beneficiary Bank address  UOB Plaza, 80 Raffles Place, Singapore 048624
+             <br/>
+             Intermediary              JPMorgan Chase Bank, NA
+             <br/>
+             Intermediary              CHASUS33
+             </div>
           </div>
        </body>
     </html>
