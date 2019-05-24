@@ -145,7 +145,7 @@ module.exports = datas => {
                         <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                         <td/>
                         <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">SGD ${sgd +
-                          (gst * sgd) / 100}</strong></td>      
+                          gst * sgd}</strong></td>      
                      </tr>
                    </table>
                    <br />
