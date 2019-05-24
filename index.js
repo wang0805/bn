@@ -79,7 +79,7 @@ app.post("/sendpdf", (req, res) => {
   };
   //preview in my window
   previewEmail(mailOptions)
-    .then(console.log)
+    .then(console.log("showing preview"))
     .catch(console.error);
 
   transporter.sendMail(mailOptions, (error, info) => {
