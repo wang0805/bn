@@ -10,6 +10,7 @@ const pdfTemplateSg = require("./documents/sg.js");
 
 const Email = require("email-templates");
 const nodemailer = require("nodemailer");
+const previewEmail = require("preview-email");
 require("dotenv").config();
 
 /**
@@ -54,6 +55,44 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //import routes calling on db
 require("./routes")(app, db);
 
+app.post("/sendpdf", (req, res) => {
+  console.log(req.body);
+  let mailOptions = {
+    from: "operations@bpifinancial.com",
+    to: req.body.invoice_emails,
+    subject: `Invoice No. ${req.body.invoiceNo}`,
+    html: `
+    <p>Dear ${req.body.client},</p>
+    <br/>
+    <p>Please find the invoice for the previous month trades</p>
+    <br/>
+    <p>Best Regards,</p>
+    <p>BPI Operations</p>
+    `,
+    attachments: [
+      {
+        filename: `invoice${req.body.invoiceNo}.pdf`,
+        path: __dirname + "/result.pdf",
+        contentType: "application/pdf"
+      }
+    ]
+  };
+  //preview in my window
+  previewEmail(mailOptions)
+    .then(console.log)
+    .catch(console.error);
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    res.send("Successfull in sending email");
+  });
+});
+
+//create pdf and send a promise to the client side
 app.post("/createpdf", (req, res) => {
   let options = {
     orientation: "landscape",
@@ -105,12 +144,12 @@ app.post("/createpdf", (req, res) => {
   }
 });
 
+// after receiving the promise, .then from promise and get the pdf file
 app.get("/getpdf", (req, res) => {
   res.sendFile(`${__dirname}/result.pdf`);
 });
 
 app.post("/send", (req, res) => {
-  // console.log(req.body, "req body from /send");
   // buyer
   let size = 0;
   if (req.body.instrument === "S") {
