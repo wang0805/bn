@@ -142,21 +142,21 @@ module.exports = datas => {
              <div class="justify-left bankdets">
                Payment by TT:
                <br/>
-               Beneficiary name          Bright Point International Futures (SG) Pte Ltd
+               Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
                <br/>
-               Beneficiary back          United Overseas Bank Limited, Singapore
+               Beneficiary bank:          United Overseas Bank Limited, Singapore
                <br/>
-               Beneficiary Account No.   451-907-917-2
+               Beneficiary Account No.:   451-907-917-2
                <br/>
-               Currency                  USD
+               Currency:                  USD
                <br/>
-               Swift code                UOVBSGSGXXX
+               Swift code:                UOVBSGSGXXX
                <br/>
-               Beneficiary Bank address  UOB Plaza, 80 Raffles Place, Singapore 048624
+               Beneficiary Bank address:  UOB Plaza, 80 Raffles Place, Singapore 048624
                <br/>
-               Intermediary              JPMorgan Chase Bank, NA
+               Intermediary:              JPMorgan Chase Bank, NA
                <br/>
-               Intermediary              CHASUS33
+               Intermediary:              CHASUS33
              </div>
              <p></p>
              <div class="justify-left bankdets">

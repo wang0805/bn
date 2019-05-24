@@ -5,6 +5,10 @@ module.exports = datas => {
   for (let i = 0; i < datas.client.length; i++) {
     total += datas.client[i].tcomms;
   }
+  let gst = 0;
+  if (datas.client[0].in_sg === 1) {
+    gst = 7;
+  }
   let sgd = Math.round(total * datas.exrate * 100) / 100;
 
   return `
@@ -132,16 +136,16 @@ module.exports = datas => {
                      <tr>
                         <td rowspan="3"></td>
                         <td colspan="5" >GST</td>
-                        <td style="text-align: right;">7%</td>
-                        <td style="text-align: center;">SGD ${sgd *
-                          0.07}</td>      
+                        <td style="text-align: right;">${gst}%</td>
+                        <td style="text-align: center;">SGD ${(sgd * gst) /
+                          100}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
                         <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                         <td/>
-                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">SGD ${sgd *
-                          1.07}</strong></td>      
+                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">SGD ${sgd +
+                          gst * sgd}</strong></td>      
                      </tr>
                    </table>
                    <br />
@@ -149,21 +153,21 @@ module.exports = datas => {
                    <div class="justify-left bankdets">
                      Payment by TT:
                      <br/>
-                     Beneficiary name          Bright Point International Futures (SG) Pte Ltd
+                     Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
                      <br/>
-                     Beneficiary back          United Overseas Bank Limited, Singapore
+                     Beneficiary bank:          United Overseas Bank Limited, Singapore
                      <br/>
-                     Beneficiary Account No.   451-907-917-2
+                     Beneficiary Account No.:   451-907-917-2
                      <br/>
-                     Currency                  USD
+                     Currency:                  USD
                      <br/>
-                     Swift code                UOVBSGSGXXX
+                     Swift code:                UOVBSGSGXXX
                      <br/>
-                     Beneficiary Bank address  UOB Plaza, 80 Raffles Place, Singapore 048624
+                     Beneficiary Bank address:  UOB Plaza, 80 Raffles Place, Singapore 048624
                      <br/>
-                     Intermediary              JPMorgan Chase Bank, NA
+                     Intermediary:              JPMorgan Chase Bank, NA
                      <br/>
-                     Intermediary              CHASUS33
+                     Intermediary:              CHASUS33
                   </div>
                   <p></p>
                   <div class="justify-left bankdets">
