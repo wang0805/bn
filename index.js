@@ -68,8 +68,9 @@ app.post("/createpdf", (req, res) => {
     header: {
       height: "30mm",
       contents: `
-      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES(SG) PTE LTD</div>
-      <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S)079909 TEL: (65) 64990618</div>
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
       <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
       `
     },

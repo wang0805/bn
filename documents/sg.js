@@ -58,6 +58,7 @@ module.exports = datas => {
                 </style>
              </head>
              <body>
+             <img style="position: absolute; top: -100px; left: 0px;" src="bpi.png"> 
                 <div class="invoice-box">
                 <table cellpadding="0" cellspacing="0">
                    <table cellpadding="0" cellspacing="0">
@@ -137,7 +138,7 @@ module.exports = datas => {
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="5"><strong style="font-size: 12px;">Total</strong></td>
+                        <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                         <td/>
                         <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">SGD ${sgd *
                           1.07}</strong></td>      
@@ -146,25 +147,38 @@ module.exports = datas => {
                    <br />
                    <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
                    <div class="justify-left bankdets">
-                   Payment by TT:
-                   <br/>
-                   Beneficiary name          Bright Point International Futures (SG) Pte Ltd
-                   <br/>
-                   Beneficiary back          United Overseas Bank Limited, Singapore
-                   <br/>
-                   Beneficiary Account No.   451-907-917-2
-                   <br/>
-                   Currency                  USD
-                   <br/>
-                   Swift code                UOVBSGSGXXX
-                   <br/>
-                   Beneficiary Bank address  UOB Plaza, 80 Raffles Place, Singapore 048624
-                   <br/>
-                   Intermediary              JPMorgan Chase Bank, NA
-                   <br/>
-                   Intermediary              CHASUS33
-                   </div>
-                </div>
+                     Payment by TT:
+                     <br/>
+                     Beneficiary name          Bright Point International Futures (SG) Pte Ltd
+                     <br/>
+                     Beneficiary back          United Overseas Bank Limited, Singapore
+                     <br/>
+                     Beneficiary Account No.   451-907-917-2
+                     <br/>
+                     Currency                  USD
+                     <br/>
+                     Swift code                UOVBSGSGXXX
+                     <br/>
+                     Beneficiary Bank address  UOB Plaza, 80 Raffles Place, Singapore 048624
+                     <br/>
+                     Intermediary              JPMorgan Chase Bank, NA
+                     <br/>
+                     Intermediary              CHASUS33
+                  </div>
+                  <p></p>
+                  <div class="justify-left bankdets">
+                     Payment by Cheque:
+                     <br/>
+                     Crossed cheque by mail to our address at 3 Anson Road #26-01 Springleaf Tower (S) 079909 should be made payable
+                     <br/>
+                     to Bright Point International Futures (SG) Pte. Ltd
+                  </div>
+                  <p></p>        
+                  <div class="justify-left bankdets">
+                     Please quote the invoice number(s) when making payment.
+                     <br/>
+                     The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
+                  </div>
              </body>
           </html>
           `;
