@@ -78,8 +78,8 @@
 
 -- ALTER TABLE traders ADD COLUMN telephone int;
 -- ALTER TABLE clients ADD COLUMN telephone int;
-ALTER TABLE transactions ADD COLUMN consMonth INT;
-
+-- ALTER TABLE transactions ADD COLUMN consMonth INT;
+-- ALTER TABLE clients ADD COLUMN dueDate INT;
 
 -- ALTER TABLE transactions ALTER COLUMN price TYPE NUMERIC(6,3);
 

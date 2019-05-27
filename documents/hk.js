@@ -1,11 +1,13 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
 module.exports = datas => {
   const today = new Date();
+  let dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + datas.client[0].duedate);
+
   let total = 0;
   for (let i = 0; i < datas.client.length; i++) {
     total += datas.client[i].tcomms;
   }
-  let sgd = Math.round(total * datas.exrate * 100) / 100;
 
   return `
     <!doctype html>
@@ -84,6 +86,16 @@ module.exports = datas => {
                               1}/${today.getFullYear()}`}
                          </td>
                         </tr>
+                        <tr>
+                        <td style="text-align: left;">
+                           Brokerage fees for month of: ${datas.fromM} - ${
+    datas.toM
+  } ${datas.year}
+                        </td>
+                        <td style="text-align: left;">
+                           Due date: ${dueDate.toLocaleDateString()}
+                        </td>
+                     </tr>
                       </table>
                    </td>
                 </tr>
@@ -125,19 +137,14 @@ module.exports = datas => {
                </tr>
                <tr>
                   <td rowspan="3"></td>
-                  <td colspan="6">TAX</td>
-                  <td style="text-align: right;">0%</td>
-                  <td style="text-align: center;">0.00</td>      
-               </tr>
-               <tr>
-                  <td rowspan="3"></td>
-                  <td colspan="5"><strong style="font-size: 10px;">Total Amount Due</strong></td>
+                  <td colspan="6"><strong style="font-size: 10px;">Total Amount Due</strong></td>
                   <td></td>
                   <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total *
                     1.0}</strong></td>      
                </tr>
              </table>
              <br />
+             <div class="justify-left"><strong style="font-size: 9;">This is a computer generated document. No signature is required</strong></div>
              <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
              <div class="justify-left bankdets">
                Payment by TT:
