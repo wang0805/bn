@@ -141,7 +141,7 @@ app.post("/createpdf", (req, res) => {
       contents: `
       <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES LIMITED</div>
       <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
-      <div style="text-align: center; font-size: 10px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
+      <div style="text-align: center; font-size: 9px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
       `
     },
     footer: {
