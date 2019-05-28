@@ -8,7 +8,6 @@ module.exports = datas => {
   for (let i = 0; i < datas.client.length; i++) {
     total += datas.client[i].tcomms;
   }
-
   return `
     <!doctype html>
     <html>
