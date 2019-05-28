@@ -26,7 +26,7 @@ module.exports = datas => {
              margin: auto;
              padding: 0 30px;
              font-size: 8px;
-             line-height: 21px;
+             line-height: 18px;
              font-family: 'Helvetica Neue', 'Helvetica';
              color: #555;
              }
@@ -88,9 +88,7 @@ module.exports = datas => {
                         </tr>
                         <tr>
                         <td style="text-align: left;">
-                           Brokerage fees for month of: ${datas.fromM} - ${
-    datas.toM
-  } ${datas.year}
+                           Brokerage fees for month of: ${datas.fromM} - ${datas.toM} ${datas.year}
                         </td>
                         <td style="text-align: left;">
                            Due date: ${dueDate.toLocaleDateString()}
@@ -198,8 +196,8 @@ module.exports = datas => {
                   </tr>
                   <tr>
                      <td style="text-align: left;"></td>
-                     <td style="width: 37%; text-align: left; word-wrap: break-word;">Cross cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 158-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limtied"</td>
-                     <td style="width: 37%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #26-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" - Attention to "Finance Department"</td>
+                     <td style="width: 37%; text-align: left; word-wrap: break-word;">Crossed cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limtied"</td>
+                     <td style="width: 37%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #26-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" <br/> **Attention to "Bright Point International futures Limited Finance"</td>
                   </tr>
                </table>
             </div>

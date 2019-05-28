@@ -12,7 +12,7 @@ module.exports = datas => {
   if (datas.client[0].in_sg === 1) {
     gst = 7;
   }
-  let sgd = Math.round(total * datas.exrate * 100) / 100;
+  let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
 
   return `
           <!doctype html>
@@ -31,7 +31,7 @@ module.exports = datas => {
                    margin: auto;
                    padding: 0 30px;
                    font-size: 8px;
-                   line-height: 21px;
+                   line-height: 18px;
                    font-family: 'Helvetica Neue', 'Helvetica';
                    color: #555;
                    }
@@ -156,7 +156,7 @@ module.exports = datas => {
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="8" style="text-align: center;">For GST reporting purpose USD 1 = SGD ${
+                        <td colspan="8" style="text-align: center;">For GST reporting purpose SGD 1 = USD ${
                           datas.exrate
                         }</td>
                         <td style="text-align: right;"></td>   
