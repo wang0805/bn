@@ -1,6 +1,9 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
 module.exports = datas => {
   const today = new Date();
+  let dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + datas.client[0].duedate);
+
   let total = 0;
   for (let i = 0; i < datas.client.length; i++) {
     total += datas.client[i].tcomms;
@@ -88,6 +91,16 @@ module.exports = datas => {
                                     1}/${today.getFullYear()}`}
                                </td>
                               </tr>
+                              <tr>
+                                 <td style="text-align: left;">
+                                    Brokerage fees for month of: ${
+                                      datas.fromM
+                                    } - ${datas.toM} ${datas.year}
+                                 </td>
+                                 <td style="text-align: left;">
+                                    Due date: ${dueDate.toLocaleDateString()}
+                                 </td>
+                              </tr>
                             </table>
                          </td>
                       </tr>
@@ -123,14 +136,35 @@ module.exports = datas => {
                           .join(" ")}
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="7">Subtotal</td>
+                        <td colspan="7"><strong style="font-size: 10px;">Subtotal</strong></td>
                         <td/>
                         <td style="text-align: center;">USD ${total}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="6">SGD</td>
-                        <td style="text-align: right;">${datas.exrate}</td>
+                        <td colspan="6">GST</td>
+                        <td style="text-align: right;">${gst}%</td>
+                        <td style="text-align: center;">SGD ${(total * gst) /
+                          100}</td>      
+                     </tr>
+                     <tr>
+                        <td rowspan="3"></td>
+                        <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
+                        <td/>
+                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total +
+                          (gst * total) / 100}</strong></td>      
+                     </tr>
+                     <tr>
+                        <td rowspan="3"></td>
+                        <td colspan="8" style="text-align: center;">For GST reporting purpose USD 1 = SGD ${
+                          datas.exrate
+                        }</td>
+                        <td style="text-align: right;"></td>   
+                     </tr>
+                     <tr>
+                        <td rowspan="3"></td>
+                        <td colspan="5">Amount in SGD</td>
+                        <td/>
                         <td style="text-align: center;">SGD ${sgd}</td>      
                      </tr>
                      <tr>
@@ -142,14 +176,19 @@ module.exports = datas => {
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
+                        <td colspan="5">Total Amount (SGD)</td>
                         <td/>
-                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">SGD ${sgd +
-                          gst * sgd}</strong></td>      
+                        <td style="text-align: center;">SGD ${sgd +
+                          (gst * sgd) / 100}</td>      
                      </tr>
                    </table>
                    <br />
-                   <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
+                   <div class="justify-left bankdets">
+                     <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
+                     <br/>
+                     <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate.toLocaleDateString()}:</strong>
+                   </div>
+                   <p></p>
                    <div class="justify-left bankdets">
                      Payment by TT:
                      <br/>
@@ -183,6 +222,7 @@ module.exports = datas => {
                      <br/>
                      The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                   </div>
+               </div>
              </body>
           </html>
           `;

@@ -108,7 +108,7 @@ app.post("/createpdf", (req, res) => {
       height: "30mm",
       contents: `
       <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
-      <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png">
       <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
       <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
       `
@@ -123,7 +123,7 @@ app.post("/createpdf", (req, res) => {
         last: "<div style='font-size: 12px;'>Last</div>"
       }
     },
-    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
+    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
   };
   if (req.body.client[0].entity === "SG") {
     pdf.create(pdfTemplateSg(req.body), options).toFile("result.pdf", err => {
