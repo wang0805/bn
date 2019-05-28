@@ -93,9 +93,10 @@ app.post("/sendpdf", (req, res) => {
 });
 
 //create pdf and send a promise to the client side
+{/* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */}
 app.post("/createpdf", (req, res) => {
   let options = {
-    orientation: "landscape",
+    orientation: "protrait",
     format: "A4",
     border: {
       top: "1.5cm",
@@ -108,7 +109,7 @@ app.post("/createpdf", (req, res) => {
       height: "30mm",
       contents: `
       <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
-      <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png">
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
       <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
       <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
       `
@@ -123,7 +124,37 @@ app.post("/createpdf", (req, res) => {
         last: "<div style='font-size: 12px;'>Last</div>"
       }
     },
-    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
+  };
+  let optionsHK = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 10px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
+      `
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>"
+      }
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
   };
   if (req.body.client[0].entity === "SG") {
     pdf.create(pdfTemplateSg(req.body), options).toFile("result.pdf", err => {
@@ -133,7 +164,7 @@ app.post("/createpdf", (req, res) => {
       res.send(Promise.resolve()); //,then in client side
     });
   } else if (req.body.client[0].entity === "HK") {
-    pdf.create(pdfTemplateHk(req.body), options).toFile("result.pdf", err => {
+    pdf.create(pdfTemplateHk(req.body), optionsHK).toFile("result.pdf", err => {
       if (err) {
         res.send(Promise.reject());
       }

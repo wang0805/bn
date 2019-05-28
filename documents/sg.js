@@ -12,7 +12,10 @@ module.exports = datas => {
   if (datas.client[0].in_sg === 1) {
     gst = 7;
   }
-  let sgd = Math.round(total * datas.exrate * 100) / 100;
+  let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
+  let gstamt = Math.round(sgd * gst) / 100;
+  let usdTotal = Math.round((total+ (total * gst / 100)) * 100) / 100 
+  let sgdTotal = Math.round((sgd + (sgd * gst / 100)) * 100) / 100 
 
   return `
           <!doctype html>
@@ -31,7 +34,7 @@ module.exports = datas => {
                    margin: auto;
                    padding: 0 30px;
                    font-size: 8px;
-                   line-height: 21px;
+                   line-height: 18px;
                    font-family: 'Helvetica Neue', 'Helvetica';
                    color: #555;
                    }
@@ -144,19 +147,17 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="6">GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">SGD ${(total * gst) /
-                          100}</td>      
+                        <td style="text-align: center;">USD ${usdTotal-total}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
                         <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                         <td/>
-                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total +
-                          (gst * total) / 100}</strong></td>      
+                        <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${usdTotal}</strong></td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="8" style="text-align: center;">For GST reporting purpose USD 1 = SGD ${
+                        <td colspan="8" style="text-align: center;">For GST reporting purpose SGD 1 = USD ${
                           datas.exrate
                         }</td>
                         <td style="text-align: right;"></td>   
@@ -171,15 +172,13 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="5" >GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">SGD ${(sgd * gst) /
-                          100}</td>      
+                        <td style="text-align: center;">SGD ${gstamt}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
                         <td colspan="5">Total Amount (SGD)</td>
                         <td/>
-                        <td style="text-align: center;">SGD ${sgd +
-                          (gst * sgd) / 100}</td>      
+                        <td style="text-align: center;">SGD ${sgdTotal}</td>      
                      </tr>
                    </table>
                    <br />
