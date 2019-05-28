@@ -188,14 +188,14 @@ module.exports = datas => {
                      <td style="text-align: left;">JPMorgan Chase Bank, NA</td>
                   </tr>
                   <tr>
-                     <td style="text-align: left;">Intermediary/Correspondent Swift:</td>
+                     <td style="text-align: left;">Intermediary/Correspondent Swift code:</td>
                      <td style="text-align: left;"></td>
                      <td style="text-align: left;">CHASUS33</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;"></td>
                      <td style="text-align: left;"><b>Payment by Hong Kong Cheque (Only for HK customer)</b></td>
-                     <td style="text-align: left;"><b>Payment by Singapore Cheque (Only for SG Customer)</b>></td>
+                     <td style="text-align: left;"><b>Payment by Singapore Cheque (Only for SG Customer)</b></td>
                   </tr>
                   <tr>
                      <td style="text-align: left;"></td>
