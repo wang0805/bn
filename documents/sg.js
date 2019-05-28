@@ -4,6 +4,9 @@ module.exports = datas => {
   let dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + datas.client[0].duedate);
 
+  dueDate = `${dueDate.getDate()}/${dueDate.getMonth() +
+    1}/${dueDate.getFullYear()}`;
+
   let total = 0;
   for (let i = 0; i < datas.client.length; i++) {
     total += datas.client[i].tcomms;
@@ -14,8 +17,8 @@ module.exports = datas => {
   }
   let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
   let gstamt = Math.round(sgd * gst) / 100;
-  let usdTotal = Math.round((total+ (total * gst / 100)) * 100) / 100 
-  let sgdTotal = Math.round((sgd + (sgd * gst / 100)) * 100) / 100 
+  let usdTotal = Math.round((total + (total * gst) / 100) * 100) / 100;
+  let sgdTotal = Math.round((sgd + (sgd * gst) / 100) * 100) / 100;
 
   return `
           <!doctype html>
@@ -101,7 +104,7 @@ module.exports = datas => {
                                     } - ${datas.toM} ${datas.year}
                                  </td>
                                  <td style="text-align: left;">
-                                    Due date: ${dueDate.toLocaleDateString()}
+                                    Due date: ${dueDate}
                                  </td>
                               </tr>
                             </table>
@@ -147,7 +150,8 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="6">GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">USD ${usdTotal-total}</td>      
+                        <td style="text-align: center;">USD ${usdTotal -
+                          total}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
@@ -185,7 +189,7 @@ module.exports = datas => {
                    <div class="justify-left bankdets">
                      <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
                      <br/>
-                     <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate.toLocaleDateString()}:</strong>
+                     <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate}:</strong>
                    </div>
                    <p></p>
                    <div class="justify-left bankdets">
