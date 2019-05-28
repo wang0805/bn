@@ -93,9 +93,10 @@ app.post("/sendpdf", (req, res) => {
 });
 
 //create pdf and send a promise to the client side
+{/* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */}
 app.post("/createpdf", (req, res) => {
   let options = {
-    orientation: "landscape",
+    orientation: "protrait",
     format: "A4",
     border: {
       top: "1.5cm",
@@ -108,7 +109,7 @@ app.post("/createpdf", (req, res) => {
       height: "30mm",
       contents: `
       <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
-      <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
       <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
       <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
       `
@@ -126,7 +127,7 @@ app.post("/createpdf", (req, res) => {
     base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
   };
   let optionsHK = {
-    orientation: "landscape",
+    orientation: "protrait",
     format: "A4",
     border: {
       top: "1.5cm",
@@ -138,9 +139,9 @@ app.post("/createpdf", (req, res) => {
     header: {
       height: "30mm",
       contents: `
-      <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES LIMITED</div>
-      <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
-      <div style="text-align: center; font-size: 11px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 10px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
       `
     },
     footer: {

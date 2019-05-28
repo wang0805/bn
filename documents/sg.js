@@ -13,6 +13,7 @@ module.exports = datas => {
     gst = 7;
   }
   let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
+  let gstamt = Math.round(sgd * gst) / 100;
   let usdTotal = Math.round((total+ (total * gst / 100)) * 100) / 100 
   let sgdTotal = Math.round((sgd + (sgd * gst / 100)) * 100) / 100 
 
@@ -146,8 +147,7 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="6">GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">SGD ${(total * gst) /
-                          100}</td>      
+                        <td style="text-align: center;">USD ${usdTotal-total}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
@@ -172,8 +172,7 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="5" >GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">SGD ${(sgd * gst) /
-                          100}</td>      
+                        <td style="text-align: center;">SGD ${gstamt}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
