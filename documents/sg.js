@@ -156,7 +156,7 @@ module.exports = datas => {
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
-                        <td colspan="8" style="text-align: center;">For GST reporting purpose SGD 1 = USD ${
+                        <td colspan="8" style="text-align: center;">For GST reporting purpose USD 1 = SGD ${
                           datas.exrate
                         }</td>
                         <td style="text-align: right;"></td>   
@@ -183,8 +183,12 @@ module.exports = datas => {
                      </tr>
                    </table>
                    <br />
-                   <div class="justify-left"><strong style="font-size: 9;">This is a computer generated document. No signature is required</strong></div>
-                   <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
+                   <div class="justify-left bankdets">
+                     <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
+                     <br/>
+                     <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate.toLocaleDateString()}:</strong>
+                   </div>
+                   <p></p>
                    <div class="justify-left bankdets">
                      Payment by TT:
                      <br/>
@@ -218,6 +222,7 @@ module.exports = datas => {
                      <br/>
                      The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                   </div>
+               </div>
              </body>
           </html>
           `;

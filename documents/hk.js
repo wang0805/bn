@@ -131,54 +131,84 @@ module.exports = datas => {
                     .join(" ")}
                <tr>
                   <td rowspan="3"></td>
-                  <td colspan="7">Subtotal</td>
-                  <td/>
-                  <td style="text-align: center;">USD ${total}</td>      
-               </tr>
-               <tr>
-                  <td rowspan="3"></td>
-                  <td colspan="6"><strong style="font-size: 10px;">Total Amount Due</strong></td>
+                  <td colspan="7"><strong style="font-size: 10px;">Total Amount Due</strong></td>
                   <td></td>
                   <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total *
                     1.0}</strong></td>      
                </tr>
              </table>
              <br />
-             <div class="justify-left"><strong style="font-size: 9;">This is a computer generated document. No signature is required</strong></div>
-             <div class="justify-left"><strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account:</strong></div>
              <div class="justify-left bankdets">
-               Payment by TT:
+               <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
                <br/>
-               Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
-               <br/>
-               Beneficiary bank:          United Overseas Bank Limited, Singapore
-               <br/>
-               Beneficiary Account No.:   451-907-917-2
-               <br/>
-               Currency:                  USD
-               <br/>
-               Swift code:                UOVBSGSGXXX
-               <br/>
-               Beneficiary Bank address:  UOB Plaza, 80 Raffles Place, Singapore 048624
-               <br/>
-               Intermediary:              JPMorgan Chase Bank, NA
-               <br/>
-               Intermediary:              CHASUS33
-             </div>
+               <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate.toLocaleDateString()}:</strong>
+            </div>
              <p></p>
              <div class="justify-left bankdets">
-               Payment by Cheque:
-               <br/>
-               Crossed cheque by mail to our address at 3 Anson Road #26-01 Springleaf Tower (S) 079909 should be made payable
-               <br/>
-               to Bright Point International Futures (SG) Pte. Ltd
-             </div>
-             <p></p>
-             <div class="justify-left bankdets">
+               <table cellpadding="0" cellspacing="0" style="width: 90%;">
+                  <tr>
+                     <th></th>
+                     <th style="text-align: left;"><b>Local Payment (within Hong Kong) via bank transfer:</b></th>
+                     <th style="text-align: left;"><b>Overseas Payment (Outside of Hong Kong) via TT:</b></th>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Beneficiary name:</td>
+                     <td style="text-align: left;">Bright Point International Futures Limited</td>
+                     <td style="text-align: left;">Bright Point International Futures Limited</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Beneficiary Bank:</td>
+                     <td style="text-align: left;">Bank of China (Hong Kong) Limited, Hong Kong</td>
+                     <td style="text-align: left;">United Overseas Bank Limited, Singapore</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Beneficiary Account No.:</td>
+                     <td style="text-align: left;">012-916-9-261633-6</td>
+                     <td style="text-align: left;">451-907-833-8</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Currency:</td>
+                     <td style="text-align: left;">USD</td>
+                     <td style="text-align: left;">USD</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Swift Code:</td>
+                     <td style="text-align: left;">BKCHHKHHXXX</td>
+                     <td style="text-align: left;">UOVBSGSGXXX</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Beneficiary Bank Address:</td>
+                     <td style="text-align: left;">Bank of China Tower, 1 Garden Road</td>
+                     <td style="text-align: left;">UOB Plaza, 80 Raffles place (S)048624</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Intermediary/Correspondent Bank:</td>
+                     <td style="text-align: left;"></td>
+                     <td style="text-align: left;">JPMorgan Chase Bank, NA</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;">Intermediary/Correspondent Swift:</td>
+                     <td style="text-align: left;"></td>
+                     <td style="text-align: left;">CHASUS33</td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;"></td>
+                     <td style="text-align: left;"><b>Payment by Hong Kong Cheque (Only for HK customer)</b></td>
+                     <td style="text-align: left;"><b>Payment by Singapore Cheque (Only for SG Customer)</b>></td>
+                  </tr>
+                  <tr>
+                     <td style="text-align: left;"></td>
+                     <td style="width: 37%; text-align: left; word-wrap: break-word;">Cross cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 158-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limtied"</td>
+                     <td style="width: 37%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #26-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" - Attention to "Finance Department"</td>
+                  </tr>
+               </table>
+            </div>
+            <p></p>
+            <div class="justify-left bankdets">
                Please quote the invoice number(s) when making payment.
                <br/>
                The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
-           </div>
+            </div>
           </div>
        </body>
     </html>
