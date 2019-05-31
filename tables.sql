@@ -82,7 +82,8 @@
 -- ALTER TABLE clients ADD COLUMN dueDate INT;
 
 -- ALTER TABLE transactions ALTER COLUMN price TYPE NUMERIC(6,3);
-
+-- ALTER TABLE clients ALTER COLUMN telephone TYPE varchar(15);
+-- ALTER TABLE traders ALTER COLUMN telephone TYPE varchar(15);
 
 -- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
 -- inner join clients_products 
