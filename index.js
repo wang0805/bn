@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("./routes")(app, db);
 
 app.post("/sendpdf", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.invoice_emails,
@@ -93,7 +93,9 @@ app.post("/sendpdf", (req, res) => {
 });
 
 //create pdf and send a promise to the client side
-{/* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */}
+{
+  /* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */
+}
 app.post("/createpdf", (req, res) => {
   let options = {
     orientation: "protrait",
@@ -213,7 +215,8 @@ app.post("/send", (req, res) => {
         size: size,
         trader: req.body.b_trader,
         account: req.body.b_accounts,
-        commission: req.body.b_comms
+        commission: req.body.b_comms,
+        id: req.body.b_client_id
       }
     })
     .then(console.log("success for buyer"))
@@ -238,7 +241,8 @@ app.post("/send", (req, res) => {
         size: size,
         trader: req.body.s_trader,
         account: req.body.s_accounts,
-        commission: req.body.s_comms
+        commission: req.body.s_comms,
+        id: req.body.s_client_id
       }
     })
     .then(console.log("success for seller"))
