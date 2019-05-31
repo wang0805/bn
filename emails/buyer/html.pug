@@ -12,7 +12,10 @@ p Quantity(lots): #{qty} lots/month
 p Quantity(MT): #{size} MT
 p Trader: #{trader}
 p Account: #{account}
-p Commission: #{commission} USD/MT (#{commission*size} USD)
+if id == 13
+    p Commissison: N/A
+else
+    p Commission: #{commission} USD/MT (#{commission*size} USD)
 br
 p Best Regards,
 p Bright Point International Futures (SG) Pte Ltd
