@@ -62,8 +62,6 @@ module.exports = db => {
   };
 
   const update = (req, response) => {
-    //let user_id = request.cookies.user_id;
-
     db.transactions.update(req.body, (error, result) => {
       if (error) {
         console.log("error", error);
@@ -71,6 +69,34 @@ module.exports = db => {
       } else {
         response.json(result.rows[0]);
         // console.log("results of edit", result.rows[0]);
+      }
+    });
+  };
+
+  const indexInvoice = (req, res) => {
+    db.transactions.indexInvoice((error, result) => {
+      if (error) {
+        console.log("error", error);
+        res.sendStatus(500);
+      } else {
+        // console.log(
+        //   "controller index result rows of transactions: ",
+        //   result.rows
+        // );
+        // console.log(typeof result.rows, "type of ");
+
+        res.json(result.rows);
+      }
+    });
+  };
+
+  const updateInvoice = (req, response) => {
+    db.transactions.updateInvoice(req.body, (error, result) => {
+      if (error) {
+        console.log("error", error);
+        response.sendStatus(500);
+      } else {
+        response.send("sucecssful in updating invoice");
       }
     });
   };
@@ -86,6 +112,8 @@ module.exports = db => {
     index,
     indexDay,
     edit,
-    update
+    update,
+    indexInvoice,
+    updateInvoice
   };
 };

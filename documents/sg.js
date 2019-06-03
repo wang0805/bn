@@ -85,7 +85,7 @@ module.exports = datas => {
                                   }</strong>
                                   </td>
                                   <td style="text-align: left;">
-                                     Invoice No: ${datas.invoiceNo}
+                                     Invoice No: SG${datas.invoiceNo}
                                   </td>
                                </tr>
                                <tr>

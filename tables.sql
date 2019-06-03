@@ -76,6 +76,13 @@
 -- 	created_at TIMESTAMP DEFAULT now()
 -- );
 
+-- CREATE TABLE IF NOT EXISTS invoice (
+-- 	id SERIAL PRIMARY KEY,
+-- 	entity TEXT,
+--     number INT,
+-- 	created_at TIMESTAMP DEFAULT now()
+-- );
+
 -- ALTER TABLE traders ADD COLUMN telephone int;
 -- ALTER TABLE clients ADD COLUMN telephone int;
 -- ALTER TABLE transactions ADD COLUMN consMonth INT;
