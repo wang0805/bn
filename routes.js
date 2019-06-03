@@ -35,11 +35,13 @@ module.exports = (app, db) => {
     guard.check("user"),
     transactions.indexDay
   );
+  app.get("/api/invoice", transactions.indexInvoice);
   app.get("/api/users", users.index);
   app.get("/api/transactions/:id", transactions.edit);
 
   app.post("/api/transactions", transactions.create);
   app.post("/api/transactions/:id", transactions.update);
+  app.post("/api/invoice", transactions.updateInvoice);
   app.post("/users/create", users.create);
   app.post("/users/logout", users.logout);
 };

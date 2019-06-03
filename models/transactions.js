@@ -105,11 +105,31 @@ module.exports = dbPoolInstance => {
     });
   };
 
+  const indexInvoice = callback => {
+    const query = `SELECT * from invoice;`;
+
+    dbPoolInstance.query(query, (error, result) => {
+      callback(error, result);
+    });
+  };
+
+  const updateInvoice = (obj, callback) => {
+    const query = `update invoice SET number=$1 WHERE id=$2;`;
+
+    values = [obj.number, obj.entity];
+
+    dbPoolInstance.query(query, values, (error, result) => {
+      callback(error, result);
+    });
+  };
+
   return {
     create,
     index,
     indexDay,
     edit,
-    update
+    update,
+    indexInvoice,
+    updateInvoice
   };
 };

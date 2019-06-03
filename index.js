@@ -60,7 +60,9 @@ app.post("/sendpdf", (req, res) => {
   let mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.invoice_emails,
-    subject: `Invoice No. ${req.body.invoiceNo}`,
+    subject: `${req.body.client} ${req.body.toM}${req.body.year} Invoice ${
+      req.body.invoiceNo
+    }`,
     html: `
     <p>Dear ${req.body.client},</p>
     <br/>
@@ -71,7 +73,7 @@ app.post("/sendpdf", (req, res) => {
     `,
     attachments: [
       {
-        filename: `invoice${req.body.invoiceNo}.pdf`,
+        filename: `invoice_${req.body.invoiceNo}.pdf`,
         path: __dirname + "/result.pdf",
         contentType: "application/pdf"
       }
