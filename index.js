@@ -70,6 +70,7 @@ app.post("/sendpdf", (req, res) => {
     <br/>
     <p>Best Regards,</p>
     <p>BPI Operations</p>
+    <p>Email: operations@bpifinancial.com</p>
     `,
     attachments: [
       {
