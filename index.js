@@ -7,6 +7,8 @@ const pdf = require("html-pdf");
 
 const pdfTemplateHk = require("./documents/hk.js");
 const pdfTemplateSg = require("./documents/sg.js");
+const pdfRecapBuyer = require("./documents/buyer.js");
+const pdfRecapSeller = require("./documents/seller.js");
 
 const Email = require("email-templates");
 const nodemailer = require("nodemailer");
@@ -185,71 +187,180 @@ app.get("/getpdf", (req, res) => {
   res.sendFile(`${__dirname}/result.pdf`);
 });
 
-app.post("/send", (req, res) => {
-  // buyer
+app.post("/send", async (req, res) => {
+  // options to create pdf
+  let buyoptions = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1,
+    header: {
+      height: "20mm",
+      contents: `
+      <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div>   
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png">
+      `
+    },
+    footer: {
+      height: "20mm",
+      contents: {
+        first: `
+        <div style="text-align: center; font-size: 12px;">Bright Point International Futures</div>
+        <div style="text-align: center; font-size: 12px;">SG | T: +65 6239 9293 | E: operations@bpifinancial.com</div>  `
+      }
+    },
+    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+  };
+  let selloptions = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1,
+    header: {
+      height: "20mm",
+      contents: `
+      <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div> 
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png"> 
+      `
+    },
+    footer: {
+      height: "20mm",
+      contents: {
+        first: `      
+        <div style="text-align: center; font-size: 12px;">Bright Point International Futures</div>
+        <div style="text-align: center; font-size: 12px;">SG | T: +65 6239 9293 | E: operations@bpifinancial.com</div>     
+        `
+      }
+    },
+    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+  };
+
+  await pdf
+    .create(pdfRecapBuyer(req.body), buyoptions)
+    .toFile("recapbuy.pdf", err => {
+      if (err) {
+        res.send("Error in buyer recap");
+      } else {
+        console.log("Successful in creating buyer recap");
+      }
+    });
+  await pdf
+    .create(pdfRecapSeller(req.body), selloptions)
+    .toFile("recapsell.pdf", err => {
+      if (err) {
+        res.send("Error in seller recap");
+      } else {
+        console.log("Successful in creating seller recap");
+      }
+    });
+
+  //for emails
   let size = 0;
+  let strike = "N/A";
   if (req.body.instrument === "S") {
     size = req.body.qty * 500 * parseInt(req.body.consMonth);
   } else {
     size = req.body.qty * 100 * parseInt(req.body.consMonth);
   }
-
-  let strike = "N/A";
   if (req.body.strike) {
-    strike = `USD${req.body.strike}`;
+    strike = `USD ${req.body.strike}`;
   }
+  //sending emails to clients
+  let buy_mailOptions = {
+    from: "operations@bpifinancial.com",
+    to: req.body.b_recap,
+    subject: `Recap ${req.body.b_client} ${req.body.execDate}`,
+    html: `
+    <p>Dear ${req.body.b_client},</p>
+    <br/>
+    <p>Please see the trade details as follows:</p>
+    <p>Trade Id: BPI${req.body.tradeid}</p>
+    <p>Buy/Sell: Buy</p>
+    <p>Product: ${req.body.product_code}</p>
+    <p>Contract: ${req.body.contract}</p>
+    <p>Price: ${req.body.price}</p>
+    <p>Strike(if applicable): ${strike}</p>
+    <p>Instrument: ${req.body.instrument}</p>
+    <p>Quantity(lots): ${req.body.qty} lots/month</p>
+    <p>Quantity(MT): ${size} MT</p>
+    <p>Trader: ${req.body.b_trader}</p>
+    <p>Account: ${req.body.b_accounts}</p>
+    <p>Commission: Standard as Agreed</p>
+    <br/>
+    <p>Best Regards,</p>
+    <p>BPI Operations</p>
+    <p>Email: operations@bpifinancial.com</p>
+    `,
+    attachments: [
+      {
+        filename: `Recap_${req.body.tradeid}.pdf`,
+        path: __dirname + "/recapbuy.pdf",
+        contentType: "application/pdf"
+      }
+    ]
+  };
 
-  email
-    .send({
-      template: "buyer",
-      message: {
-        to: req.body.b_recap
-      },
-      locals: {
-        tradeid: req.body.tradeid,
-        buyer: req.body.b_client,
-        date: req.body.execDate,
-        product_code: req.body.product_code,
-        contract: req.body.contract,
-        price: req.body.price,
-        strike: strike,
-        instrument: req.body.instrument,
-        qty: req.body.qty,
-        size: size,
-        trader: req.body.b_trader,
-        account: req.body.b_accounts,
-        commission: req.body.b_comms,
-        id: req.body.b_client_id
+  let sell_mailOptions = {
+    from: "operations@bpifinancial.com",
+    to: req.body.s_recap,
+    subject: `Recap ${req.body.s_client} ${req.body.execDate}`,
+    html: `
+    <p>Dear ${req.body.s_client},</p>
+    <br/>
+    <p>Please see the trade details as follows:</p>
+    <p>Trade Id: BPI${req.body.tradeid}</p>
+    <p>Buy/Sell: Sell</p>
+    <p>Product: ${req.body.product_code}</p>
+    <p>Contract: ${req.body.contract}</p>
+    <p>Price: ${req.body.price}</p>
+    <p>Strike(if applicable): ${strike}</p>
+    <p>Instrument: ${req.body.instrument}</p>
+    <p>Quantity(lots): ${req.body.qty} lots/month</p>
+    <p>Quantity(MT): ${size} MT</p>
+    <p>Trader: ${req.body.s_trader}</p>
+    <p>Account: ${req.body.s_accounts}</p>
+    <p>Commission: Standard as Agreed</p>
+    <br/>
+    <p>Best Regards,</p>
+    <p>BPI Operations</p>
+    <p>Email: operations@bpifinancial.com</p>
+    `,
+    attachments: [
+      {
+        filename: `Recap_${req.body.tradeid}.pdf`,
+        path: __dirname + "/recapsell.pdf",
+        contentType: "application/pdf"
       }
-    })
-    .then(console.log("success for buyer"))
-    .catch(console.error);
-  // seller
-  email
-    .send({
-      template: "seller",
-      message: {
-        to: req.body.s_recap
-      },
-      locals: {
-        tradeid: req.body.tradeid,
-        seller: req.body.s_client,
-        date: req.body.execDate,
-        product_code: req.body.product_code,
-        contract: req.body.contract,
-        price: req.body.price,
-        strike: strike,
-        instrument: req.body.instrument,
-        qty: req.body.qty,
-        size: size,
-        trader: req.body.s_trader,
-        account: req.body.s_accounts,
-        commission: req.body.s_comms,
-        id: req.body.s_client_id
+    ]
+  };
+
+  setTimeout(function() {
+    transporter.sendMail(buy_mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
       }
-    })
-    .then(console.log("success for seller"))
-    .catch(console.error);
+      console.log("3rd Message sent: %s", info.messageId);
+      // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      transporter.sendMail(sell_mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log("4th Message sent: %s", info.messageId);
+        // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      });
+    });
+  }, 500);
+
   res.send("success in sending mail");
 });
 
@@ -279,3 +390,71 @@ server.on("close", () => {
     console.log("Shut down db connection pool");
   });
 });
+
+// app.post("/send", (req, res) => {
+//   // buyer
+//   let size = 0;
+//   if (req.body.instrument === "S") {
+//     size = req.body.qty * 500 * parseInt(req.body.consMonth);
+//   } else {
+//     size = req.body.qty * 100 * parseInt(req.body.consMonth);
+//   }
+
+//   let strike = "N/A";
+//   if (req.body.strike) {
+//     strike = `USD${req.body.strike}`;
+//   }
+
+//   email
+//     .send({
+//       template: "buyer",
+//       message: {
+//         to: req.body.b_recap
+//       },
+//       locals: {
+//         tradeid: req.body.tradeid,
+//         buyer: req.body.b_client,
+//         date: req.body.execDate,
+//         product_code: req.body.product_code,
+//         contract: req.body.contract,
+//         price: req.body.price,
+//         strike: strike,
+//         instrument: req.body.instrument,
+//         qty: req.body.qty,
+//         size: size,
+//         trader: req.body.b_trader,
+//         account: req.body.b_accounts,
+//         commission: req.body.b_comms,
+//         id: req.body.b_client_id
+//       }
+//     })
+//     .then(console.log("success for buyer"))
+//     .catch(console.error);
+//   // seller
+//   email
+//     .send({
+//       template: "seller",
+//       message: {
+//         to: req.body.s_recap
+//       },
+//       locals: {
+//         tradeid: req.body.tradeid,
+//         seller: req.body.s_client,
+//         date: req.body.execDate,
+//         product_code: req.body.product_code,
+//         contract: req.body.contract,
+//         price: req.body.price,
+//         strike: strike,
+//         instrument: req.body.instrument,
+//         qty: req.body.qty,
+//         size: size,
+//         trader: req.body.s_trader,
+//         account: req.body.s_accounts,
+//         commission: req.body.s_comms,
+//         id: req.body.s_client_id
+//       }
+//     })
+//     .then(console.log("success for seller"))
+//     .catch(console.error);
+//   res.send("success in sending mail");
+// });
