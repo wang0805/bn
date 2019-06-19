@@ -59,6 +59,10 @@ module.exports = datas => {
                                 }</td>
                             </tr>
                             <tr class="item">
+                                <td style="width: 30%; text-align: left">Client</td>
+                                <td style="width: 70% ;text-align: left">${datas.b_client}</td>
+                            </tr>
+                            <tr class="item">
                                 <td style="width: 30%; text-align: left">Buy/Sell</td>
                                 <td style="width: 70% ;text-align: left">Buy</td>
                             </tr>

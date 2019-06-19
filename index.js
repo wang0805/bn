@@ -203,7 +203,7 @@ app.post("/send", async (req, res) => {
       height: "20mm",
       contents: `
       <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div>   
-      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png">
+      <img style="width: 90px; position: absolute; top: 0px; left: 90px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
       `
     },
     footer: {
@@ -214,7 +214,7 @@ app.post("/send", async (req, res) => {
         <div style="text-align: center; font-size: 12px;">SG | T: +65 6239 9293 | E: operations@bpifinancial.com</div>  `
       }
     },
-    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
   };
   let selloptions = {
     orientation: "protrait",
@@ -230,7 +230,7 @@ app.post("/send", async (req, res) => {
       height: "20mm",
       contents: `
       <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div> 
-      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///Users/wenhao/Projects/bpi/backend/documents/bpi.png"> 
+      <img style="width: 90px; position: absolute; top: 0px; left: 90px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png"> 
       `
     },
     footer: {
@@ -242,7 +242,7 @@ app.post("/send", async (req, res) => {
         `
       }
     },
-    base: "file:///Users/wenhao/Projects/bpi/backend/documents/" // to be able to read images
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
   };
 
   await pdf
@@ -359,7 +359,7 @@ app.post("/send", async (req, res) => {
         // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       });
     });
-  }, 500);
+  }, 1000);
 
   res.send("success in sending mail");
 });
