@@ -187,6 +187,8 @@ app.get("/getpdf", (req, res) => {
   res.sendFile(`${__dirname}/result.pdf`);
 });
 
+//email generation
+
 app.post("/createrecappdf", async (req, res) => {
   // options to create pdf
   let buyoptions = {
@@ -427,7 +429,7 @@ app.post("/send", async (req, res) => {
     ]
   };
 
-  setTimeout(function() {
+  await setTimeout(function() {
     transporter.sendMail(buy_mailOptions, (error, info) => {
       if (error) {
         return console.log(error);
