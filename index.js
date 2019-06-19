@@ -187,6 +187,89 @@ app.get("/getpdf", (req, res) => {
   res.sendFile(`${__dirname}/result.pdf`);
 });
 
+app.post("/createrecappdf", async (req, res) => {
+  // options to create pdf
+  let buyoptions = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1,
+    header: {
+      height: "20mm",
+      contents: `
+      <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div>   
+      <img style="width: 90px; position: absolute; top: 0px; left: 90px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      `
+    },
+    footer: {
+      height: "20mm",
+      contents: {
+        first: `
+        <div style="text-align: center; font-size: 12px;">Bright Point International Futures</div>
+        <div style="text-align: center; font-size: 12px;">SG | T: +65 6239 9293 | E: operations@bpifinancial.com</div>  `
+      }
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
+  };
+  let selloptions = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm"
+    },
+    paginationOffset: 1,
+    header: {
+      height: "20mm",
+      contents: `
+      <div style="text-align: center; font-size: 15px;">BRIGHT POINT INTERNATIONAL FUTURES</div> 
+      <img style="width: 90px; position: absolute; top: 0px; left: 90px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png"> 
+      `
+    },
+    footer: {
+      height: "20mm",
+      contents: {
+        first: `      
+        <div style="text-align: center; font-size: 12px;">Bright Point International Futures</div>
+        <div style="text-align: center; font-size: 12px;">SG | T: +65 6239 9293 | E: operations@bpifinancial.com</div>     
+        `
+      }
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/" // to be able to read images
+  };
+
+  await pdf
+    .create(pdfRecapBuyer(req.body), buyoptions)
+    .toFile(`./recaps/recap_b_${req.body.tradeid}.pdf`, err => {
+      if (err) {
+        res.send(Promise.reject());
+      } else {
+        console.log("Successful in creating buyer recap");
+      }
+    });
+  await pdf
+    .create(pdfRecapSeller(req.body), selloptions)
+    .toFile(`./recaps/recap_s_${req.body.tradeid}.pdf`, err => {
+      if (err) {
+        res.send(Promise.reject());
+      } else {
+        console.log("Successful in creating seller recap");
+      }
+    });
+  res.send(Promise.resolve());
+});
+
+app.get("/getrecappdf", (req, res) => {
+  res.sendFile(`${__dirname}/result.pdf`);
+});
+
 app.post("/send", async (req, res) => {
   // options to create pdf
   let buyoptions = {
@@ -247,7 +330,7 @@ app.post("/send", async (req, res) => {
 
   await pdf
     .create(pdfRecapBuyer(req.body), buyoptions)
-    .toFile("recapbuy.pdf", err => {
+    .toFile(`./recaps/recap_b_${req.body.tradeid}.pdf`, err => {
       if (err) {
         res.send("Error in buyer recap");
       } else {
@@ -256,7 +339,7 @@ app.post("/send", async (req, res) => {
     });
   await pdf
     .create(pdfRecapSeller(req.body), selloptions)
-    .toFile("recapsell.pdf", err => {
+    .toFile(`./recaps/recap_s_${req.body.tradeid}.pdf`, err => {
       if (err) {
         res.send("Error in seller recap");
       } else {
@@ -304,7 +387,7 @@ app.post("/send", async (req, res) => {
     attachments: [
       {
         filename: `Recap_${req.body.tradeid}.pdf`,
-        path: __dirname + "/recapbuy.pdf",
+        path: __dirname + `/recaps/recap_b_${req.body.tradeid}.pdf`,
         contentType: "application/pdf"
       }
     ]
@@ -338,7 +421,7 @@ app.post("/send", async (req, res) => {
     attachments: [
       {
         filename: `Recap_${req.body.tradeid}.pdf`,
-        path: __dirname + "/recapsell.pdf",
+        path: __dirname + `/recaps/recap_s_${req.body.tradeid}.pdf`,
         contentType: "application/pdf"
       }
     ]

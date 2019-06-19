@@ -9,7 +9,7 @@ module.exports = datas => {
   }
 
   let strike = "N/A";
-  if (datas.strike) {
+  if (datas.strike && datas.strike !== "NaN") {
     strike = `USD ${datas.strike}`;
   }
 
@@ -60,7 +60,9 @@ module.exports = datas => {
                                 </tr>
                                 <tr class="item">
                                     <td style="width: 30%; text-align: left">Client</td>
-                                    <td style="width: 70% ;text-align: left">${datas.s_client}</td>
+                                    <td style="width: 70% ;text-align: left">${
+                                      datas.s_client
+                                    }</td>
                                 </tr>
                                 <tr class="item">
                                     <td style="width: 30%; text-align: left">Buy/Sell</td>
