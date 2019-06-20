@@ -15,7 +15,7 @@ module.exports = datas => {
 
   let comms = `${datas.b_comms} USD/MT (${datas.b_comms * size} USD)`;
   if (datas.b_client_id === 13) {
-    comms = "N/A";
+    comms = "Standard as Agreed";
   }
 
   let deal_id = datas.deal_id;
