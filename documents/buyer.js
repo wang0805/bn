@@ -18,6 +18,11 @@ module.exports = datas => {
     comms = "N/A";
   }
 
+  let deal_id = datas.deal_id;
+  if (!datas.deal_id) {
+    deal_id = "Subject to Clearing";
+  }
+
   return `
             <!doctype html>
             <html>
@@ -117,6 +122,10 @@ module.exports = datas => {
                                 <td style="width: 70%; text-align: left">${
                                   datas.b_accounts
                                 }</td>
+                            </tr>
+                            <tr class="item">
+                                <td style="width: 30%; text-align: left">Exchange Ref</td>
+                                <td style="width: 70%; text-align: left">${deal_id}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Commission</td>
