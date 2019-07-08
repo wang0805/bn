@@ -24,7 +24,8 @@ module.exports = dbPoolInstance => {
     inner join accounts
     on accounts.client_id = clients.id
     inner join traders
-    on traders.client_id= clients.id;`;
+    on traders.client_id= clients.id
+    ORDER BY client_name ASC;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
