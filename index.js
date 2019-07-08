@@ -444,7 +444,7 @@ app.post("/send", async (req, res) => {
         // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       });
     });
-  }, 1000);
+  }, 1888);
 
   res.send("success in sending mail");
 });
