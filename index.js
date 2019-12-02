@@ -62,9 +62,7 @@ app.post("/sendpdf", (req, res) => {
   let mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.invoice_emails,
-    subject: `${req.body.client} ${req.body.toM}${req.body.year} Invoice ${
-      req.body.invoiceNo
-    }`,
+    subject: `${req.body.client} ${req.body.toM}${req.body.year} Invoice ${req.body.invoiceNo}`,
     html: `
     <p>Dear ${req.body.client},</p>
     <br/>
@@ -102,6 +100,7 @@ app.post("/sendpdf", (req, res) => {
   /* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */
 }
 app.post("/createpdf", (req, res) => {
+  console.log(req.body, "testing");
   let options = {
     orientation: "protrait",
     format: "A4",
@@ -444,7 +443,7 @@ app.post("/send", async (req, res) => {
         // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       });
     });
-  }, 1888);
+  }, 2288);
 
   res.send("success in sending mail");
 });
