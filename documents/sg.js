@@ -39,7 +39,7 @@ module.exports = datas => {
                    font-size: 8px;
                    line-height: 18px;
                    font-family: 'Helvetica Neue', 'Helvetica';
-                   color: #555;
+                   color: #000000;
                    }
                    .justify-left {
                    text-align: left;
@@ -114,6 +114,7 @@ module.exports = datas => {
                         <td>Trade Id</td>
                         <td>Deal Id</td>
                         <td>Trade date</td>
+                        <td>Account</td>
                         <td>Product</td>
                         <td>Instrument</td>
                         <td>Contract</td>
@@ -129,6 +130,7 @@ module.exports = datas => {
                            <td>${row.id}</td>
                            <td>${row.deal_id}</td>
                            <td>${row.trade_date}</td>
+                           <td>${row.account}</td>
                            <td>${row.product}</td>
                            <td>${row.instrument}</td>
                            <td>${row.contract}</td>
@@ -150,8 +152,9 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="6">GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">USD ${usdTotal -
-                          total}</td>      
+                        <td style="text-align: center;">USD ${(
+                          usdTotal - total
+                        ).toFixed(2)}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
@@ -176,7 +179,9 @@ module.exports = datas => {
                         <td rowspan="3"></td>
                         <td colspan="5" >GST</td>
                         <td style="text-align: right;">${gst}%</td>
-                        <td style="text-align: center;">SGD ${gstamt}</td>      
+                        <td style="text-align: center;">SGD ${gstamt.toFixed(
+                          2
+                        )}</td>      
                      </tr>
                      <tr>
                         <td rowspan="3"></td>
