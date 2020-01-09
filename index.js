@@ -362,7 +362,7 @@ app.post("/send", async (req, res) => {
   let buy_mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.b_recap,
-    subject: `Recap ${req.body.b_client} ${req.body.execDate} ${req.body.tradeid}`,
+    subject: `Recap ${req.body.b_client} ${req.body.execDate} BPI${req.body.tradeid}`,
     html: `
     <p>Dear ${req.body.b_client},</p>
     <br/>
@@ -396,7 +396,7 @@ app.post("/send", async (req, res) => {
   let sell_mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.s_recap,
-    subject: `Recap ${req.body.s_client} ${req.body.execDate} ${req.body.tradeid}`,
+    subject: `Recap ${req.body.s_client} ${req.body.execDate} BPI${req.body.tradeid}`,
     html: `
     <p>Dear ${req.body.s_client},</p>
     <br/>
