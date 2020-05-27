@@ -1,4 +1,4 @@
-module.exports = db => {
+module.exports = (db) => {
   const create = (request, response) => {
     // console.log("create transactions request:", request.body);
     db.transactions.create(request.body, (error, result) => {
@@ -68,7 +68,7 @@ module.exports = db => {
         response.sendStatus(500);
       } else {
         response.json(result.rows[0]);
-        // console.log("results of edit", result.rows[0]);
+        // console.log("results of edit", result);
       }
     });
   };
@@ -114,6 +114,6 @@ module.exports = db => {
     edit,
     update,
     indexInvoice,
-    updateInvoice
+    updateInvoice,
   };
 };

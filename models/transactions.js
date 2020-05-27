@@ -1,4 +1,4 @@
-module.exports = dbPoolInstance => {
+module.exports = (dbPoolInstance) => {
   const create = (obj, callback) => {
     const query = `INSERT INTO transactions ( consmonth, s_clientid, b_clientid, strike, instrument, trade_date, 
         trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
@@ -31,7 +31,7 @@ module.exports = dbPoolInstance => {
       parseInt(obj.qty),
       obj.contract,
       parseInt(obj.year),
-      obj.created_byid
+      obj.created_byid,
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
@@ -39,7 +39,7 @@ module.exports = dbPoolInstance => {
     });
   };
 
-  const index = callback => {
+  const index = (callback) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.product, 
     transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, 
     transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, 
@@ -70,7 +70,7 @@ module.exports = dbPoolInstance => {
   //   });
   // };
 
-  const indexDay = callback => {
+  const indexDay = (callback) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
     transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, 
     transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, 
@@ -96,16 +96,24 @@ module.exports = dbPoolInstance => {
   };
 
   const update = (obj, callback) => {
-    const query = `update transactions SET deal_id=$1 WHERE id=$2;`;
+    const query = `update transactions SET deal_id=$1, s_commission=$3, b_commission=$4, price=$5, qty=$6, product=$7 WHERE id=$2;`;
 
-    values = [obj.dealid, obj.tradeid];
+    values = [
+      obj.deal_id,
+      obj.tradeid,
+      obj.s_commission,
+      obj.b_commission,
+      obj.price,
+      obj.qty,
+      obj.product_code,
+    ];
 
     dbPoolInstance.query(query, values, (error, result) => {
       callback(error, result);
     });
   };
 
-  const indexInvoice = callback => {
+  const indexInvoice = (callback) => {
     const query = `SELECT * from invoice;`;
 
     dbPoolInstance.query(query, (error, result) => {
@@ -130,6 +138,6 @@ module.exports = dbPoolInstance => {
     edit,
     update,
     indexInvoice,
-    updateInvoice
+    updateInvoice,
   };
 };
