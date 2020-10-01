@@ -100,7 +100,6 @@ app.post("/sendpdf", (req, res) => {
   /* <img style="width: 90px; position: absolute; top: 0px; left: 120px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png> */
 }
 app.post("/createpdf", (req, res) => {
-  console.log(req.body, "testing");
   let options = {
     orientation: "protrait",
     format: "A4",
