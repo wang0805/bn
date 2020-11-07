@@ -21,7 +21,7 @@ module.exports = (dbPoolInstance) => {
 
   //commission to set as commission_productcode
   const index = (callback) => {
-    const query = `SELECT clients.id, clients.address, clients.entity, clients.in_sg, clients.duedate, clients.invoice_emails, clients.idb, clients.commission AS commission, clients.commission_lpf As commission_lpf, clients.commission_acf As commission_acf, clients.commission_m42 As commission_m42, clients.name AS client_name, clients.recap_emails AS recap_emails, accounts.account, traders.name AS trader_name from clients
+    const query = `SELECT clients.id, clients.address, clients.entity, clients.in_sg, clients.duedate, clients.invoice_emails, clients.idb, clients.commission AS commission, clients.commission_lpf As commission_lpf, clients.commission_acf As commission_acf, clients.commission_m42f As commission_m42f, clients.name AS client_name, clients.recap_emails AS recap_emails, accounts.account, traders.name AS trader_name from clients
     inner join accounts
     on accounts.client_id = clients.id
     inner join traders
