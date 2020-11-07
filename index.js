@@ -350,13 +350,15 @@ app.post("/send", async (req, res) => {
     });
 
   //for emails
-  let size = 0;
   let strike = "N/A";
-  if (req.body.instrument === "S") {
-    size = req.body.qty * 500 * parseInt(req.body.consMonth);
-  } else {
-    size = req.body.qty * 100 * parseInt(req.body.consMonth);
-  }
+  let size =
+    req.body.qty * req.body.contract_size * parseInt(req.body.consMonth);
+  // let size = 0;
+  // if (req.body.instrument === "S") {
+  //   size = req.body.qty * 500 * parseInt(req.body.consMonth);
+  // } else {
+  //   size = req.body.qty * 100 * parseInt(req.body.consMonth);
+  // }
   if (req.body.strike) {
     strike = `USD ${req.body.strike}`;
   }
@@ -492,13 +494,15 @@ app.post("/sendSeller", async (req, res) => {
     });
 
   //for emails
-  let size = 0;
   let strike = "N/A";
-  if (req.body.instrument === "S") {
-    size = req.body.qty * 500 * parseInt(req.body.consMonth);
-  } else {
-    size = req.body.qty * 100 * parseInt(req.body.consMonth);
-  }
+  let size =
+    req.body.qty * req.body.contract_size * parseInt(req.body.consMonth);
+  // let size = 0;
+  // if (req.body.instrument === "S") {
+  //   size = req.body.qty * 500 * parseInt(req.body.consMonth);
+  // } else {
+  //   size = req.body.qty * 100 * parseInt(req.body.consMonth);
+  // }
   if (req.body.strike) {
     strike = `USD ${req.body.strike}`;
   }
@@ -591,13 +595,15 @@ app.post("/sendBuyer", async (req, res) => {
     });
 
   //for emails
-  let size = 0;
+  let size =
+    req.body.qty * req.body.contract_size * parseInt(req.body.consMonth);
   let strike = "N/A";
-  if (req.body.instrument === "S") {
-    size = req.body.qty * 500 * parseInt(req.body.consMonth);
-  } else {
-    size = req.body.qty * 100 * parseInt(req.body.consMonth);
-  }
+  // let size = 0;
+  // if (req.body.instrument === "S") {
+  //   size = req.body.qty * 500 * parseInt(req.body.consMonth);
+  // } else {
+  //   size = req.body.qty * 100 * parseInt(req.body.consMonth);
+  // }
   if (req.body.strike) {
     strike = `USD ${req.body.strike}`;
   }
