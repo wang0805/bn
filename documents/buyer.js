@@ -1,19 +1,23 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
-module.exports = datas => {
+module.exports = (datas) => {
   const today = new Date();
-  let size = 0;
-  if (datas.instrument === "S") {
-    size = datas.qty * 500 * parseInt(datas.consMonth);
-  } else {
-    size = datas.qty * 100 * parseInt(datas.consMonth);
-  }
+  let size = datas.qty * datas.contract_size * parseInt(datas.consMonth);
+
+  // let size = 0;
+  // if (datas.instrument === "S") {
+  //   size = datas.qty * 500 * parseInt(datas.consMonth);
+  // } else {
+  //   size = datas.qty * 100 * parseInt(datas.consMonth);
+  // }
 
   let strike = "N/A";
   if (datas.strike && datas.strike !== "NaN") {
     strike = `USD ${datas.strike}`;
   }
 
-  let comms = `${datas.b_comms} USD/MT (${datas.b_comms * size} USD)`;
+  let comms = `${datas.b_comms} USD/MT (${
+    (Math.round(datas.b_comms * 100) / 100) * size
+  } USD)`;
   if (datas.b_client_id === 13) {
     comms = "Standard as Agreed";
   }
@@ -59,15 +63,11 @@ module.exports = datas => {
                         <table cellpadding="0" cellspacing="0">
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Trade Id</td>
-                                <td style="width: 70%; text-align: left">BPI${
-                                  datas.tradeid
-                                }</td>
+                                <td style="width: 70%; text-align: left">BPI${datas.tradeid}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Client</td>
-                                <td style="width: 70% ;text-align: left">${
-                                  datas.b_client
-                                }</td>
+                                <td style="width: 70% ;text-align: left">${datas.b_client}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Buy/Sell</td>
@@ -75,21 +75,15 @@ module.exports = datas => {
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Product</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.product_code
-                                }</td>
+                                <td style="width: 70%; text-align: left">${datas.product_code}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Contract</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.contract
-                                }</td>
+                                <td style="width: 70%; text-align: left">${datas.contract}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Price</td>
-                                <td style="width: 70%; text-align: left">USD ${
-                                  datas.price
-                                }</td>
+                                <td style="width: 70%; text-align: left">USD ${datas.price}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Strike (if applicable)</td>
@@ -97,15 +91,11 @@ module.exports = datas => {
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Instrument</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.instrument
-                                }</td>
+                                <td style="width: 70%; text-align: left">${datas.instrument}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Quantity(lots)</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.qty
-                                } lots/month</td>
+                                <td style="width: 70%; text-align: left">${datas.qty} lots/month</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Quantity(MT)</td>
@@ -113,15 +103,11 @@ module.exports = datas => {
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Trader</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.b_trader
-                                }</td>
+                                <td style="width: 70%; text-align: left">${datas.b_trader}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Account</td>
-                                <td style="width: 70%; text-align: left">${
-                                  datas.b_accounts
-                                }</td>
+                                <td style="width: 70%; text-align: left">${datas.b_accounts}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Exchange Ref</td>

@@ -2,10 +2,10 @@ module.exports = (dbPoolInstance) => {
   const create = (obj, callback) => {
     const query = `INSERT INTO transactions ( consmonth, s_clientid, b_clientid, strike, instrument, trade_date, 
         trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
-        s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id, deal_id) 
+        s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id, deal_id, volume) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, 
-          $18, $19, $20, $21, $22, $23, $24, $25, $26) RETURNING id;`;
-
+          $18, $19, $20, $21, $22, $23, $24, $25, $26, $27) RETURNING id;`;
+    let volume = parseInt(obj.qty) * obj.contract_size * obj.consMonth;
     const values = [
       obj.consMonth,
       obj.s_client_id,
@@ -33,6 +33,7 @@ module.exports = (dbPoolInstance) => {
       parseInt(obj.year),
       obj.created_byid,
       obj.deal_id,
+      volume,
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
@@ -44,7 +45,7 @@ module.exports = (dbPoolInstance) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.product, 
     transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, 
     transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, 
-    transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, 
+    transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.volume,
     transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
     inner join users
     on users.id = transactions.created_by_id
@@ -74,7 +75,7 @@ module.exports = (dbPoolInstance) => {
   const indexDay = (callback) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
     transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, 
-    transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, 
+    transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.volume,
     transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, 
     users.name AS created_by from transactions 
     inner join users
