@@ -16,7 +16,7 @@ module.exports = (datas) => {
   }
 
   let comms = `${datas.s_comms} USD/MT (${
-    (Math.round(datas.s_comms * 100) / 100) * size
+    Math.round(datas.s_comms * 100 * size) / 100
   } USD)`;
   if (datas.s_client_id === 13) {
     comms = "Standard as Agreed";
