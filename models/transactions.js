@@ -98,7 +98,7 @@ module.exports = (dbPoolInstance) => {
   };
 
   const update = (obj, callback) => {
-    const query = `update transactions SET deal_id=$1, s_commission=$3, b_commission=$4, price=$5, qty=$6, product=$7 WHERE id=$2;`;
+    const query = `update transactions SET deal_id=$1, s_commission=$3, b_commission=$4, price=$5, qty=$6, product=$7, volume=$8 WHERE id=$2;`;
 
     values = [
       obj.deal_id,
@@ -108,6 +108,7 @@ module.exports = (dbPoolInstance) => {
       obj.price,
       obj.qty,
       obj.product_code,
+      obj.volume,
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
