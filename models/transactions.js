@@ -49,7 +49,8 @@ module.exports = (dbPoolInstance) => {
     transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, users.name AS created_by from transactions 
     inner join users
     on users.id = transactions.created_by_id
-    ORDER BY trade_id DESC;`;
+    ORDER BY trade_id DESC
+    LIMIT 6000;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);

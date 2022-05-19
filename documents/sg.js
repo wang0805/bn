@@ -1,11 +1,12 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
-module.exports = datas => {
+module.exports = (datas) => {
   const today = new Date();
   let dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + datas.client[0].duedate);
 
-  dueDate = `${dueDate.getDate()}/${dueDate.getMonth() +
-    1}/${dueDate.getFullYear()}`;
+  dueDate = `${dueDate.getDate()}/${
+    dueDate.getMonth() + 1
+  }/${dueDate.getFullYear()}`;
 
   let total = 0;
   for (let i = 0; i < datas.client.length; i++) {
@@ -85,7 +86,7 @@ module.exports = datas => {
                                   }</strong>
                                   </td>
                                   <td style="text-align: left;">
-                                     Invoice No: SG${datas.invoiceNo}
+                                     Tax Invoice No: SG${datas.invoiceNo}
                                   </td>
                                </tr>
                                <tr>
@@ -93,8 +94,9 @@ module.exports = datas => {
                                  Address: ${datas.client[0].address}
                                </td>
                                <td style="text-align: left;">
-                                  Date: ${`${today.getDate()}/${today.getMonth() +
-                                    1}/${today.getFullYear()}`}
+                                  Date: ${`${today.getDate()}/${
+                                    today.getMonth() + 1
+                                  }/${today.getFullYear()}`}
                                </td>
                               </tr>
                               <tr>
@@ -125,7 +127,7 @@ module.exports = datas => {
                      </tr>
                         ${datas.client
                           .map(
-                            row => `
+                            (row) => `
                         <tr class="item">
                            <td>${row.id}</td>
                            <td>${row.deal_id}</td>
@@ -202,25 +204,25 @@ module.exports = datas => {
                      <br/>
                      Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
                      <br/>
-                     Beneficiary bank:          United Overseas Bank Limited, Singapore
+                     Beneficiary bank:          CIMB Bank Berhad
                      <br/>
-                     Beneficiary Account No.:   451-907-917-2
+                     Beneficiary Account No.:   2000689659
                      <br/>
                      Currency:                  USD
                      <br/>
-                     Swift code:                UOVBSGSGXXX
+                     Swift code:                CIBBSGSG
                      <br/>
-                     Beneficiary Bank address:  UOB Plaza, 80 Raffles Place, Singapore 048624
+                     Beneficiary Bank address:  50 Raffles place #01-02 (S)048623
                      <br/>
-                     Intermediary:              JPMorgan Chase Bank, NA
+                     Intermediary:              The Bank Of New York Mellon
                      <br/>
-                     Intermediary:              CHASUS33
+                     Intermediary:              IRVTUS3N
                   </div>
                   <p></p>
                   <div class="justify-left bankdets">
                      Payment by Cheque:
                      <br/>
-                     Crossed cheque by mail to our address at 3 Anson Road #26-01 Springleaf Tower (S) 079909 should be made payable
+                     Crossed cheque by mail to our address at 3 Anson Road #19-01 Springleaf Tower (S) 079909 should be made payable
                      <br/>
                      to Bright Point International Futures (SG) Pte. Ltd
                   </div>

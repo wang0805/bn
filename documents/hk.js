@@ -1,10 +1,11 @@
 // module.exports = ({ name, price1, price2, receiptId }) => {
-module.exports = datas => {
+module.exports = (datas) => {
   const today = new Date();
   let dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + datas.client[0].duedate);
-  dueDate = `${dueDate.getDate()}/${dueDate.getMonth() +
-    1}/${dueDate.getFullYear()}`;
+  dueDate = `${dueDate.getDate()}/${
+    dueDate.getMonth() + 1
+  }/${dueDate.getFullYear()}`;
 
   let total = 0;
   for (let i = 0; i < datas.client.length; i++) {
@@ -83,8 +84,9 @@ module.exports = datas => {
                            Address: ${datas.client[0].address}
                          </td>
                          <td style="text-align: left;">
-                            Date: ${`${today.getDate()}/${today.getMonth() +
-                              1}/${today.getFullYear()}`}
+                            Date: ${`${today.getDate()}/${
+                              today.getMonth() + 1
+                            }/${today.getFullYear()}`}
                          </td>
                         </tr>
                         <tr>
@@ -115,7 +117,7 @@ module.exports = datas => {
                </tr>
                   ${datas.client
                     .map(
-                      row => `
+                      (row) => `
                   <tr class="item">
                      <td>${row.id}</td>
                      <td>${row.deal_id}</td>
@@ -136,8 +138,9 @@ module.exports = datas => {
                   <td rowspan="3"></td>
                   <td colspan="7"><strong style="font-size: 10px;">Total Amount Due</strong></td>
                   <td></td>
-                  <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${total *
-                    1.0}</strong></td>      
+                  <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${
+                    total * 1.0
+                  }</strong></td>      
                </tr>
              </table>
              <br />
@@ -162,12 +165,12 @@ module.exports = datas => {
                   <tr>
                      <td style="text-align: left;">Beneficiary Bank:</td>
                      <td style="text-align: left;">Bank of China (Hong Kong) Limited, Hong Kong</td>
-                     <td style="text-align: left;">United Overseas Bank Limited, Singapore</td>
+                     <td style="text-align: left;">CIMB Bank Berhad</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;">Beneficiary Account No.:</td>
                      <td style="text-align: left;">012-916-9-261633-6</td>
-                     <td style="text-align: left;">451-907-833-8</td>
+                     <td style="text-align: left;">2000650207</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;">Currency:</td>
@@ -177,22 +180,22 @@ module.exports = datas => {
                   <tr>
                      <td style="text-align: left;">Swift Code:</td>
                      <td style="text-align: left;">BKCHHKHHXXX</td>
-                     <td style="text-align: left;">UOVBSGSGXXX</td>
+                     <td style="text-align: left;">CIBBSGSG</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;">Beneficiary Bank Address:</td>
                      <td style="text-align: left;">Bank of China Tower, 1 Garden Road</td>
-                     <td style="text-align: left;">UOB Plaza, 80 Raffles place (S)048624</td>
+                     <td style="text-align: left;">50 Raffles place #01-02 (S)048623</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;">Intermediary/Correspondent Bank:</td>
                      <td style="text-align: left;"></td>
-                     <td style="text-align: left;">JPMorgan Chase Bank, NA</td>
+                     <td style="text-align: left;">The Bank Of New York Mellon</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;">Intermediary/Correspondent Swift code:</td>
                      <td style="text-align: left;"></td>
-                     <td style="text-align: left;">CHASUS33</td>
+                     <td style="text-align: left;">IRVTUS3N</td>
                   </tr>
                   <tr>
                      <td style="text-align: left;"></td>
@@ -202,7 +205,7 @@ module.exports = datas => {
                   <tr>
                      <td style="text-align: left;"></td>
                      <td style="width: 38%; text-align: left; word-wrap: break-word;">Crossed cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limtied"</td>
-                     <td style="width: 38%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #26-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" <br/> **Attention to "Bright Point International futures Limited Finance"</td>
+                     <td style="width: 38%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #19-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" <br/> **Attention to "Bright Point International futures Limited Finance"</td>
                   </tr>
                </table>
             </div>

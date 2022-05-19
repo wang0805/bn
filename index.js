@@ -115,8 +115,9 @@ app.post("/createpdf", (req, res) => {
       contents: `
       <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
       <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
-      <div style="text-align: center; font-size: 10px;">3 Anson Road, #26-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
+      <div style="text-align: center; font-size: 10px;">3 Anson Road, #19-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
       <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
+      <div style="text-align: center; font-size: 10px;">Tax Invoice</div>
       `,
     },
     footer: {
@@ -253,7 +254,7 @@ app.post("/createrecappdf", async (req, res) => {
       if (err) {
         res.send(Promise.reject());
       } else {
-        console.log("Successful in creating buyer recap");
+        console.log(`Successful in creating buyer recap ${req.body.tradeid}`);
       }
     });
   await pdf
@@ -262,7 +263,7 @@ app.post("/createrecappdf", async (req, res) => {
       if (err) {
         res.send(Promise.reject());
       } else {
-        console.log("Successful in creating seller recap");
+        console.log(`Successful in creating seller recap ${req.body.tradeid}`);
       }
     });
   res.send(Promise.resolve());
