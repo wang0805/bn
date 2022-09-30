@@ -192,7 +192,11 @@ module.exports = (datas) => {
                         <td style="text-align: center;">SGD ${sgdTotal}</td>      
                      </tr>
                    </table>
-                   <br />
+                   ${
+                     datas.client[0].deduct_broker_comms
+                       ? `<p>Commissions shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
+                       : `<br />`
+                   }
                    <div class="justify-left bankdets">
                      <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
                      <br/>
@@ -231,6 +235,8 @@ module.exports = (datas) => {
                      Please quote the invoice number(s) when making payment.
                      <br/>
                      The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
+                     <br/>
+                     The beneficiary bears all charges of the banks engaged in the transfer of the payment
                   </div>
                </div>
              </body>
