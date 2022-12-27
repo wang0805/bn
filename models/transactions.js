@@ -91,16 +91,28 @@ module.exports = (dbPoolInstance) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
     transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, 
     transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.volume,
-    transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at, 
-    users.name AS created_by from transactions 
-    inner join users
-    on users.id = transactions.created_by_id 
+    transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at from transactions
     ORDER BY trade_id ASC;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
     });
   };
+
+  // const indexDay = (callback) => {
+  //   const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time,
+  //   transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader,
+  //   transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.volume,
+  //   transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.created_at,
+  //   users.name AS created_by from transactions
+  //   inner join users
+  //   on users.id = transactions.created_by_id
+  //   ORDER BY trade_id ASC;`;
+
+  //   dbPoolInstance.query(query, (error, result) => {
+  //     callback(error, result);
+  //   });
+  // };
 
   const edit = (tradeid, callback) => {
     const query = `SELECT * from transactions WHERE id=$1;`;
