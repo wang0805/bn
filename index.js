@@ -83,7 +83,7 @@ app.post("/sendpdf", (req, res) => {
   //preview in my window
   previewEmail(mailOptions)
     .then(console.log("showing preview"))
-    .catch(console.error);
+    .catch(err => console.error(err));
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
@@ -431,6 +431,7 @@ app.post("/send", async (req, res) => {
       },
     ],
   };
+  console.log(sell_mailOptions["to"], "<Sell", buy_mailOptions["to"], "<buy")
 
   await setTimeout(function () {
     transporter.sendMail(buy_mailOptions, (error, info) => {

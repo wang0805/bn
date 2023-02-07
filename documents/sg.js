@@ -14,7 +14,7 @@ module.exports = (datas) => {
   }
   let gst = 0;
   if (datas.client[0].in_sg === 1) {
-    gst = 7;
+    gst = 8;
   }
   let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
   let gstamt = Math.round(sgd * gst) / 100;
