@@ -7,6 +7,7 @@ const pdf = require("html-pdf");
 
 const pdfTemplateHk = require("./documents/hk.js");
 const pdfTemplateSg = require("./documents/sg.js");
+const pdfTemplateUk = require("./documents/uk.js");
 const pdfRecapBuyer = require("./documents/buyer.js");
 const pdfRecapSeller = require("./documents/seller.js");
 
@@ -162,6 +163,38 @@ app.post("/createpdf", (req, res) => {
     },
     base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
   };
+
+  let optionsUK = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm",
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FINANCIAL(UK) LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 9px;">83 Victoria Street, London SW1H 0HW</div>
+      `,
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>",
+      },
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
+  };
+
   if (req.body.client[0].entity === "SG") {
     pdf.create(pdfTemplateSg(req.body), options).toFile("result.pdf", (err) => {
       if (err) {
@@ -172,6 +205,15 @@ app.post("/createpdf", (req, res) => {
   } else if (req.body.client[0].entity === "HK") {
     pdf
       .create(pdfTemplateHk(req.body), optionsHK)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+  } else if (req.body.client[0].entity === "UK") {
+    pdf
+      .create(pdfTemplateUk(req.body), optionsUK)
       .toFile("result.pdf", (err) => {
         if (err) {
           res.send(Promise.reject());
