@@ -144,7 +144,7 @@
                               <td rowspan="3"></td>
                               <td colspan="7"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                               <td/>
-                              <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${usdTotal}</strong></td>      
+                              <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${Intl.NumberFormat('en-US').format(usdTotal)}</strong></td>      
                            </tr>
     
                          </table>

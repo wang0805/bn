@@ -138,8 +138,9 @@ module.exports = (datas) => {
                   <td rowspan="3"></td>
                   <td colspan="7"><strong style="font-size: 10px;">Total Amount Due</strong></td>
                   <td></td>
-                  <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${
-                    total * 1.0
+                  <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD 
+                  ${Intl.NumberFormat('en-US').format(
+                    total * 1.0)
                   }</strong></td>      
                </tr>
              </table>
