@@ -85,7 +85,7 @@
                                         }</strong>
                                         </td>
                                         <td style="text-align: left;">
-                                           Credit Note No: UK${datas.invoiceNo}
+                                           Credit Note No: UC${datas.invoiceNo}
                                         </td>
                                      </tr>
                                      <tr>

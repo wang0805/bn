@@ -76,7 +76,7 @@
                                     }</strong>
                                   </td>
                                   <td style="text-align: left;">
-                                     Credit Note No: HK${datas.invoiceNo}
+                                     Credit Note No: HC${datas.invoiceNo}
                                   </td>
                                </tr>
                                <tr>
