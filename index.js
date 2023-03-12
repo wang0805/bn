@@ -7,6 +7,10 @@ const pdf = require("html-pdf");
 
 const pdfTemplateHk = require("./documents/hk.js");
 const pdfTemplateSg = require("./documents/sg.js");
+const pdfTemplateUk = require("./documents/uk.js");
+const pdfTemplateCNHk = require("./documents/hkcn.js");
+const pdfTemplateCNSg = require("./documents/sgcn.js");
+const pdfTemplateCNUk = require("./documents/ukcn.js");
 const pdfRecapBuyer = require("./documents/buyer.js");
 const pdfRecapSeller = require("./documents/seller.js");
 
@@ -57,6 +61,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 //import routes calling on db
 require("./routes")(app, db);
 
+//send invoice pdf
 app.post("/sendpdf", (req, res) => {
   // console.log(req.body);
   let mailOptions = {
@@ -75,6 +80,45 @@ app.post("/sendpdf", (req, res) => {
     attachments: [
       {
         filename: `invoice_${req.body.invoiceNo}.pdf`,
+        path: __dirname + "/result.pdf",
+        contentType: "application/pdf",
+      },
+    ],
+  };
+  //preview in my window
+  previewEmail(mailOptions)
+    .then(console.log("showing preview"))
+    .catch(err => console.error(err));
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    res.send("Successfull in sending email");
+  });
+});
+
+//send credit note PDF
+app.post("/sendCNpdf", (req, res) => {
+  // console.log(req.body);
+  let mailOptions = {
+    from: "operations@bpifinancial.com",
+    to: req.body.invoice_emails,
+    subject: `${req.body.client} ${req.body.toM}${req.body.year} Credit Note ${req.body.invoiceNo}`,
+    html: `
+    <p>Dear ${req.body.client},</p>
+    <br/>
+    <p>Please find the Credit Note attached</p>
+    <br/>
+    <p>Best Regards,</p>
+    <p>BPI Operations</p>
+    <p>Email: operations@bpifinancial.com</p>
+    `,
+    attachments: [
+      {
+        filename: `credit_note_${req.body.invoiceNo}.pdf`,
         path: __dirname + "/result.pdf",
         contentType: "application/pdf",
       },
@@ -162,6 +206,38 @@ app.post("/createpdf", (req, res) => {
     },
     base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
   };
+
+  let optionsUK = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm",
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FINANCIAL(UK) LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 9px;">Suite 706, 83 Victoria Street, London SW1H 0HW</div>
+      `,
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>",
+      },
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
+  };
+
   if (req.body.client[0].entity === "SG") {
     pdf.create(pdfTemplateSg(req.body), options).toFile("result.pdf", (err) => {
       if (err) {
@@ -172,6 +248,143 @@ app.post("/createpdf", (req, res) => {
   } else if (req.body.client[0].entity === "HK") {
     pdf
       .create(pdfTemplateHk(req.body), optionsHK)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+  } else if (req.body.client[0].entity === "UK") {
+    pdf
+      .create(pdfTemplateUk(req.body), optionsUK)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+  } else {
+    res.send(Promise.reject());
+  }
+});
+
+//create Credit note PDF
+app.post("/createCNpdf", (req, res) => {
+  let options = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm",
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES (SG) PTE LTD</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 10px;">3 Anson Road, #19-01 Springleaf Tower (S) 079909 TEL: (65) 64990618</div>
+      <div style="text-align: center; font-size: 10px;">GST Registration No: 201724830E</div>
+      <div style="text-align: center; font-size: 15px;">Credit Note</div>
+      `,
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>",
+      },
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
+  };
+  let optionsHK = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm",
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FUTURES LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 9px;">Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong</div>
+      <div style="text-align: center; font-size: 15px;">Credit Note</div>
+      `,
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>",
+      },
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
+  };
+
+  let optionsUK = {
+    orientation: "protrait",
+    format: "A4",
+    border: {
+      top: "1.5cm",
+      right: "1cm",
+      bottom: "0.5cm",
+      left: "1cm",
+    },
+    paginationOffset: 1,
+    header: {
+      height: "30mm",
+      contents: `
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FINANCIAL(UK) LIMITED</div>
+      <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
+      <div style="text-align: center; font-size: 9px;">83 Victoria Street, London SW1H 0HW</div>
+      <div style="text-align: center; font-size: 15px;">Credit Note</div>
+      `,
+    },
+    footer: {
+      height: "15mm",
+      contents: {
+        first: "<div style='font-size: 12px;'>1</div>",
+        2: "<div style='font-size: 12px;'>2</div>",
+        3: "<div style='font-size: 12px;'>3</div>",
+        4: "<div style='font-size: 12px;'>4</div>",
+        last: "<div style='font-size: 12px;'>Last</div>",
+      },
+    },
+    base: "file:///C:/Users/test/bpibackoffice/backend/documents/", // to be able to read images
+  };
+
+  if (req.body.client[0].entity === "SG") {
+    pdf.create(pdfTemplateCNSg(req.body), options).toFile("result.pdf", (err) => {
+      if (err) {
+        res.send(Promise.reject());
+      }
+      res.send(Promise.resolve()); //,then in client side
+    });
+  } else if (req.body.client[0].entity === "HK") {
+    pdf
+      .create(pdfTemplateCNHk(req.body), optionsHK)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+  } else if (req.body.client[0].entity === "UK") {
+    pdf
+      .create(pdfTemplateCNUk(req.body), optionsUK)
       .toFile("result.pdf", (err) => {
         if (err) {
           res.send(Promise.reject());
