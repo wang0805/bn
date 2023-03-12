@@ -16,9 +16,10 @@
         if (datas.client[0].in_sg === 1) {
           gst = 8;
         }
- 
+        let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
+        let gstamt = Math.round(sgd * gst) / 100;
         let usdTotal = Math.round((total + (total * gst) / 100) * 100) / 100;
-       
+        let sgdTotal = Math.round((sgd + (sgd * gst) / 100) * 100) / 100;
       
         return `
                 <!doctype html>
@@ -85,7 +86,7 @@
                                         }</strong>
                                         </td>
                                         <td style="text-align: left;">
-                                          Invoice No: UK${datas.invoiceNo}
+                                            Credit Note No: SG${datas.invoiceNo}
                                         </td>
                                      </tr>
                                      <tr>
@@ -102,10 +103,7 @@
                                        <td style="text-align: left;">
                                           Brokerage fees for month of: ${
                                             datas.fromM
-                                          } - ${datas.toM} ${datas.year}
-                                       </td>
-                                       <td style="text-align: left;">
-                                          Due date: ${dueDate}
+                                          } ${datas.year}
                                        </td>
                                     </tr>
                                   </table>
@@ -145,53 +143,93 @@
                                 .join(" ")}
                            <tr>
                               <td rowspan="3"></td>
-                              <td colspan="7"><strong style="font-size: 12px;">Total Amount Due</strong></td>
+                              <td colspan="7"><strong style="font-size: 10px;">Subtotal</strong></td>
+                              <td/>
+                              <td style="text-align: center;">USD ${total}</td>      
+                           </tr>
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="6">GST</td>
+                              <td style="text-align: right;">${gst}%</td>
+                              <td style="text-align: center;">USD ${(
+                                usdTotal - total
+                              ).toFixed(2)}</td>      
+                           </tr>
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="5"><strong style="font-size: 12px;">Total Amount Due</strong></td>
                               <td/>
                               <td style="text-align: center; border-bottom: 1px solid #eee;"><strong style="font-size: 10px;">USD ${usdTotal}</strong></td>      
                            </tr>
-    
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="8" style="text-align: center;">For GST reporting purpose SGD 1 = USD ${
+                                datas.exrate
+                              }</td>
+                              <td style="text-align: right;"></td>   
+                           </tr>
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="5">Amount in SGD</td>
+                              <td/>
+                              <td style="text-align: center;">SGD ${sgd}</td>      
+                           </tr>
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="5" >GST</td>
+                              <td style="text-align: right;">${gst}%</td>
+                              <td style="text-align: center;">SGD ${gstamt.toFixed(
+                                2
+                              )}</td>      
+                           </tr>
+                           <tr>
+                              <td rowspan="3"></td>
+                              <td colspan="5">Total Amount (SGD)</td>
+                              <td/>
+                              <td style="text-align: center;">SGD ${sgdTotal}</td>      
+                           </tr>
                          </table>
                          ${
                            datas.client[0].deduct_broker_comms
-                             ? `<p>Commissions shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
+                             ? `<p>Net Outstanding shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
                              : `<br />`
                          }
                          <div class="justify-left bankdets">
                            <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
                            <br/>
-                           <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate}:</strong>
+                           <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the Credit Note is in good order, kindly make payment to the following bank account:</strong>
                          </div>
                          <p></p>
                          <div class="justify-left bankdets">
                            Payment by TT:
                            <br/>
-                           Beneficiary name:          Bright Point International Financial (UK) Limited
+                           Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
                            <br/>
-                           Beneficiary bank:          Investec Bank PLC
+                           Beneficiary bank:          CIMB Bank Berhad
                            <br/>
-                           IBAN:                      GB53IVES40644707308860
+                           Beneficiary Account No.:   2000689659
                            <br/>
                            Currency:                  USD
                            <br/>
-                           Swift code:                IVESGB2L
+                           Swift code:                CIBBSGSG
                            <br/>
-                           Beneficiary Bank address:  30 Gresham St, London EC2V 7QN, UK
+                           Beneficiary Bank address:  50 Raffles place #01-02 (S)048623
                            <br/>
-                           Intermediary:              Wells Fargo Bank N.A
+                           Intermediary:              The Bank Of New York Mellon
                            <br/>
-                           Intermediary:              PNBPUS3NNYC
+                           Intermediary:              IRVTUS3N
                         </div>
                         <p></p>
                         <div class="justify-left bankdets">
                            Payment by Cheque:
                            <br/>
-                           Crossed cheque by mail to our address at Suite 706, 83 Victoria Street, London SW1H 0HW should be made payable
+                           Crossed cheque by mail to our address at 3 Anson Road #19-01 Springleaf Tower (S) 079909 should be made payable
                            <br/>
-                           to Bright Point International Financial (UK) Limited
+                           to Bright Point International Futures (SG) Pte. Ltd
                         </div>
                         <p></p>        
                         <div class="justify-left bankdets">
-                           Please quote the invoice number(s) when making payment.
+                           Please quote the Credit Note number(s) when making payment.
                            <br/>
                            The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                            <br/>

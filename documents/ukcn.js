@@ -85,7 +85,7 @@
                                         }</strong>
                                         </td>
                                         <td style="text-align: left;">
-                                          Invoice No: UK${datas.invoiceNo}
+                                           Credit Note No: UK${datas.invoiceNo}
                                         </td>
                                      </tr>
                                      <tr>
@@ -102,10 +102,7 @@
                                        <td style="text-align: left;">
                                           Brokerage fees for month of: ${
                                             datas.fromM
-                                          } - ${datas.toM} ${datas.year}
-                                       </td>
-                                       <td style="text-align: left;">
-                                          Due date: ${dueDate}
+                                          } ${datas.year}
                                        </td>
                                     </tr>
                                   </table>
@@ -153,13 +150,13 @@
                          </table>
                          ${
                            datas.client[0].deduct_broker_comms
-                             ? `<p>Commissions shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
+                             ? `<p>Net Outstanding shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
                              : `<br />`
                          }
                          <div class="justify-left bankdets">
                            <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
                            <br/>
-                           <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the invoice is in good order, kindly make payment to the following bank account by ${dueDate}:</strong>
+                           <strong style="font-size: 9;">Please notify us within 7 days if there is any billing error. If the Credit Note is in good order, kindly make payment to the following bank account:</strong>
                          </div>
                          <p></p>
                          <div class="justify-left bankdets">
@@ -191,7 +188,7 @@
                         </div>
                         <p></p>        
                         <div class="justify-left bankdets">
-                           Please quote the invoice number(s) when making payment.
+                           Please quote the Credit Note number(s) when making payment.
                            <br/>
                            The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                            <br/>
