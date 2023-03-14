@@ -236,7 +236,7 @@ module.exports = (datas) => {
                      <br/>
                      The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                      <br/>
-                     The beneficiary bears all charges of the banks engaged in the transfer of the payment
+                     The remitter bears all charges of the banks engaged in the transfer of the payment
                   </div>
                </div>
              </body>

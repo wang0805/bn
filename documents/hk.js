@@ -209,8 +209,8 @@ module.exports = (datas) => {
                   </tr>
                   <tr>
                      <td style="text-align: left;"></td>
-                     <td style="width: 38%; text-align: left; word-wrap: break-word;">Crossed cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limtied"</td>
-                     <td style="width: 38%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #19-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" <br/> **Attention to "Bright Point International futures Limited Finance"</td>
+                     <td style="width: 38%; text-align: left; word-wrap: break-word;">Crossed cheque by mail to our address at Units 3401-03, 34/F, China Merchants Tower, Shun Tak Centre, 168-200 Connaught Road Central, Sheung Wan, Hong Kong to "Bright Point International Futures Limited"</td>
+                     <td style="width: 38%; text-align: left;">Crossed Cheque by mail to our address at 3 Anson Road #19-01 SpringLeaf Tower (S)079909 to "Bright Point International Futures Limited" <br/> **Attention to "Bright Point International Futures Limited Finance"</td>
                   </tr>
                </table>
             </div>
@@ -220,7 +220,7 @@ module.exports = (datas) => {
                <br/>
                The above "Total Amount Due" should be free and clear from all taxes, bank charges and withholdings
                <br/>
-               The beneficiary bears all charges of the banks engaged in the transfer of the payment
+               The remitter bears all charges of the banks engaged in the transfer of the payment
             </div>
           </div>
        </body>
