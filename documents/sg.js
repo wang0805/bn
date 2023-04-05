@@ -206,21 +206,21 @@ module.exports = (datas) => {
                    <div class="justify-left bankdets">
                      Payment by TT:
                      <br/>
-                     Beneficiary name:          Bright Point International Futures (SG) Pte Ltd
+                     Beneficiary name:                         Bright Point International Futures (SG) Pte Ltd
                      <br/>
-                     Beneficiary bank:          CIMB Bank Berhad
+                     Beneficiary bank:                         CIMB Bank Berhad
                      <br/>
-                     Beneficiary Account No.:   2000689659
+                     Beneficiary Account No.:                  2000689659
                      <br/>
-                     Currency:                  USD
+                     Currency:                                 USD
                      <br/>
-                     Swift code:                CIBBSGSG
+                     Swift code:                               CIBBSGSG
                      <br/>
-                     Beneficiary Bank address:  50 Raffles place #01-02 (S)048623
+                     Beneficiary Bank address:                 50 Raffles place #01-02 (S)048623
                      <br/>
-                     Intermediary:              The Bank Of New York Mellon
+                     Intermediary/Correspondent Bank:          The Bank Of New York Mellon
                      <br/>
-                     Intermediary:              IRVTUS3N
+                     Intermediary/Correspondent Swift code:    IRVTUS3N
                   </div>
                   <p></p>
                   <div class="justify-left bankdets">

@@ -215,9 +215,9 @@
                            <br/>
                            Beneficiary Bank address:  50 Raffles place #01-02 (S)048623
                            <br/>
-                           Intermediary:              The Bank Of New York Mellon
+                           Intermediary/Correspondent Bank:              The Bank Of New York Mellon
                            <br/>
-                           Intermediary:              IRVTUS3N
+                           Intermediary/Correspondent Swift code:              IRVTUS3N
                         </div>
                         <p></p>
                         <div class="justify-left bankdets">
