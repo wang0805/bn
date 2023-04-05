@@ -165,21 +165,21 @@
                          <div class="justify-left bankdets">
                            Payment by TT:
                            <br/>
-                           Beneficiary name:          Bright Point International Financial (UK) Limited
+                           Beneficiary name:                         Bright Point International Financial (UK) Limited
                            <br/>
-                           Beneficiary bank:          Investec Bank PLC
+                           Beneficiary bank:                         Investec Bank PLC
                            <br/>
-                           IBAN:                      GB53IVES40644707308860
+                           IBAN:                                     GB53IVES40644707308860
                            <br/>
-                           Currency:                  USD
+                           Currency:                                 USD
                            <br/>
-                           Swift code:                IVESGB2L
+                           Swift code:                               IVESGB2L
                            <br/>
-                           Beneficiary Bank address:  30 Gresham St, London EC2V 7QN, UK
+                           Beneficiary Bank address:                 30 Gresham St, London EC2V 7QN, UK
                            <br/>
-                           Intermediary:              Wells Fargo Bank N.A
+                           Intermediary/Correspondent Bank:          Wells Fargo Bank N.A
                            <br/>
-                           Intermediary:              PNBPUS3NNYC
+                           Intermediary/Correspondent Swift code:    PNBPUS3NNYC
                         </div>
                         <p></p>
                         <div class="justify-left bankdets">
