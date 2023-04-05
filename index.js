@@ -220,7 +220,7 @@ app.post("/createpdf", (req, res) => {
     header: {
       height: "30mm",
       contents: `
-      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FINANCIAL(UK) LIMITED</div>
+      <div style="text-align: center; font-size: 13px;">BRIGHT POINT INTERNATIONAL FINANCIAL (UK) LIMITED</div>
       <img style="width: 90px; position: absolute; top: 0px; left: 30px;" src="file:///C:/Users/test/bpibackoffice/backend/documents/bpi.png">
       <div style="text-align: center; font-size: 9px;">Suite 706, 83 Victoria Street, London SW1H 0HW</div>
       `,
