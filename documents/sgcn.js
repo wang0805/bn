@@ -14,7 +14,15 @@
         }
         let gst = 0;
         if (datas.client[0].in_sg === 1) {
-          gst = 8;
+         if (datas.year <2023){
+            gst= 7
+         }
+         else if (datas.year > 2022 && datas.year < 2024) {
+            gst = 8;
+         }
+         else {
+            gst = 9
+         }
         }
         let sgd = Math.round(total * (1 / datas.exrate) * 100) / 100;
         let gstamt = Math.round(sgd * gst) / 100;

@@ -50,7 +50,7 @@ module.exports = (datas) => {
              }
              .invoice-box table tr.item td {
              border-bottom: 1px solid #eee;
-             }
+            }
              .invoice-box table tr.item.last td {
              border-bottom: none;
              }
@@ -146,8 +146,13 @@ module.exports = (datas) => {
              </table>
              ${
                datas.client[0].deduct_broker_comms
-                 ? `Commissions shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
+                 ? `<p>Commissions shall be deducted from the clearing account ${datas.client[0].deduct_broker_comms} held with BPI</p>`
                  : `<br />`
+             }
+             ${
+               datas.client[0].clientid == 142
+                 ? `Brokerage Service is provided from Hong Kong`
+                 : `</>`
              }
              <div class="justify-left bankdets">
                <strong style="font-size: 9;">This is a computer generated document. No signature is required</strong>
