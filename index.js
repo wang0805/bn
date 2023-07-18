@@ -6,6 +6,7 @@ const cors = require("cors");
 const pdf = require("html-pdf");
 
 const pdfTemplateHk = require("./documents/hk.js");
+const pdfTemplateHkChinese = require("./documents/hkchinese.js");
 const pdfTemplateSg = require("./documents/sg.js");
 const pdfTemplateUk = require("./documents/uk.js");
 const pdfTemplateCNHk = require("./documents/hkcn.js");
@@ -106,7 +107,7 @@ app.post("/sendCNpdf", (req, res) => {
   let mailOptions = {
     from: "operations@bpifinancial.com",
     to: req.body.invoice_emails,
-    subject: `${req.body.client} ${req.body.toM}${req.body.year} Credit Note ${req.body.invoiceNo}`,
+    subject: `${req.body.client} ${req.body.fromM}${req.body.year} Credit Note ${req.body.invoiceNo}`,
     html: `
     <p>Dear ${req.body.client},</p>
     <br/>
@@ -245,9 +246,18 @@ app.post("/createpdf", (req, res) => {
       }
       res.send(Promise.resolve()); //,then in client side
     });
-  } else if (req.body.client[0].entity === "HK") {
+  } else if (req.body.client[0].entity === "HK" && req.body.client[0].clientid !== 142 ) {
     pdf
       .create(pdfTemplateHk(req.body), optionsHK)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve());
+      });
+  } else if (req.body.client[0].clientid === 142) { // this coz client 142 wants Chinese
+    pdf
+      .create(pdfTemplateHkChinese(req.body), optionsHK)
       .toFile("result.pdf", (err) => {
         if (err) {
           res.send(Promise.reject());
