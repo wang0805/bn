@@ -575,8 +575,8 @@ app.post("/send", async (req, res) => {
 
   //for emails
   let strike = "N/A";
-  let size =
-    req.body.qty * req.body.contract_size * parseInt(req.body.consMonth);
+  // let size =
+  //   req.body.qty * req.body.contract_size * parseInt(req.body.consMonth);
   // let size = 0;
   // if (req.body.instrument === "S") {
   //   size = req.body.qty * 500 * parseInt(req.body.consMonth);
@@ -603,7 +603,7 @@ app.post("/send", async (req, res) => {
     <p>Strike(if applicable): ${strike}</p>
     <p>Instrument: ${req.body.instrument}</p>
     <p>Quantity(lots): ${req.body.qty} lots/month</p>
-    <p>Quantity(MT): ${size} MT</p>
+    <p>Quantity: ${req.body.volume} ${req.body.unit}</p>
     <p>Trader: ${req.body.b_trader}</p>
     <p>Account: ${req.body.b_accounts}</p>
     <p>Commission: Standard as Agreed</p>
@@ -637,7 +637,7 @@ app.post("/send", async (req, res) => {
     <p>Strike(if applicable): ${strike}</p>
     <p>Instrument: ${req.body.instrument}</p>
     <p>Quantity(lots): ${req.body.qty} lots/month</p>
-    <p>Quantity(MT): ${size} MT</p>
+    <p>Quantity: ${req.body.volume} ${req.body.unit}</p>
     <p>Trader: ${req.body.s_trader}</p>
     <p>Account: ${req.body.s_accounts}</p>
     <p>Commission: Standard as Agreed</p>
