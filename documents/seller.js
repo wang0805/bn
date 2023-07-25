@@ -15,8 +15,16 @@ module.exports = (datas) => {
     strike = `USD ${datas.strike}`;
   }
 
-  let comms = `${datas.s_comms} USD/MT (${
-    Math.round(datas.s_comms * 100 * size) / 100
+  let cal;
+  if (datas.unit === "DAYS"){
+    cal = "%"
+  }
+  else {
+    cal = "USD"
+  }
+
+  let comms = `${datas.s_comms} ${cal} (${
+    Math.round(datas.s_tcomm * 100) / 100
   } USD)`;
   if (datas.s_client_id === 13) {
     comms = "Standard as Agreed";
