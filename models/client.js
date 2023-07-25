@@ -34,7 +34,7 @@ module.exports = (dbPoolInstance) => {
   };
 
   const products = (callback) => {
-    const query = `SELECT code, name, consize from products;`;
+    const query = `SELECT code, name, consize, unit, calculation from products;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);

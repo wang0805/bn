@@ -97,6 +97,9 @@
 -- ALTER TABLE transactions ALTER COLUMN price TYPE NUMERIC(9,4);
 -- ALTER TABLE clients ALTER COLUMN telephone TYPE varchar(15);
 -- ALTER TABLE traders ALTER COLUMN telephone TYPE varchar(15);
+-- ALTER TABLE products ADD COLUMN unit TEXT;
+-- ALTER TABLE products ADD COLUMN calculation TEXT;
+-- ALTER TABLE transactions ADD COLUMN unit TEXT;
 
 -- SELECT clients.id, clients.name, products.code, products.name, gcms.code, gcms.name, accounts.account, traders.name from clients 
 -- inner join clients_products 
@@ -112,3 +115,4 @@
 -- inner join traders
 -- on traders.client_id= clients.id
 
+-- UPDATE transactions SET unit = 'MT';

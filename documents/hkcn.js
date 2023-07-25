@@ -122,8 +122,8 @@
                            <td>${row.instrument}</td>
                            <td>${row.contract}</td>
                            <td>USD ${row.price}</td>
-                           <td>${row.size} MT</td>
-                           <td>USD ${row.comms}</td>
+                           <td>${row.size} ${row.unit}</td>
+                           <td>${row.comms}</td>
                            <td>USD ${row.tcomms}</td>
                         </tr>
                         `

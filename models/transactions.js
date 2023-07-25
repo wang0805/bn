@@ -2,12 +2,12 @@ module.exports = (dbPoolInstance) => {
   const create = (obj, callback) => {
     const query = `INSERT INTO transactions ( consmonth, s_clientid, b_clientid, strike, instrument, trade_date, 
         trade_time, s_client, b_client, s_account, b_account, s_trader, b_trader, s_user, b_user, 
-        s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id, deal_id, volume, s_tcomm, b_tcomm) 
+        s_commission, b_commission, s_idb, b_idb, price, product, qty, contract, year, created_by_id, deal_id, volume, s_tcomm, b_tcomm, unit) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, 
-          $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29) RETURNING id;`;
-    let volume = parseInt(obj.qty) * obj.contract_size * obj.consMonth;
-    let s_tcomm = volume*parseFloat(obj.s_comms);
-    let b_tcomm = volume*parseFloat(obj.b_comms);
+          $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30) RETURNING id;`;
+    // let volume = parseInt(obj.qty) * obj.contract_size * obj.consMonth;
+    // let s_tcomm = volume*parseFloat(obj.s_comms);
+    // let b_tcomm = volume*parseFloat(obj.b_comms);
     const values = [
       obj.consMonth,
       obj.s_client_id,
@@ -35,9 +35,10 @@ module.exports = (dbPoolInstance) => {
       parseInt(obj.year),
       obj.created_byid,
       obj.deal_id,
-      volume,
-      s_tcomm,
-      b_tcomm
+      obj.volume,
+      obj.s_tcomm,
+      obj.b_tcomm,
+      obj.unit
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
@@ -50,7 +51,7 @@ module.exports = (dbPoolInstance) => {
     transactions.trade_date, transactions.trade_time, transactions.s_client, transactions.b_client, transactions.s_account, 
     transactions.b_account, transactions.b_trader, transactions.s_trader, transactions.s_commission, transactions.b_commission, 
     transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.volume,
-    transactions.deal_id, transactions.s_user, transactions.b_user, transactions.s_tcomm, transactions.b_tcomm, transactions.created_at from transactions 
+    transactions.deal_id, transactions.s_user, transactions.b_user, transactions.s_tcomm, transactions.b_tcomm, transactions.unit, transactions.created_at from transactions 
     ORDER BY trade_id DESC
     LIMIT 10000;`;
 
@@ -95,7 +96,7 @@ module.exports = (dbPoolInstance) => {
     const query = `SELECT transactions.consmonth, transactions.id AS trade_id, transactions.s_clientid, transactions.b_clientid, transactions.strike, transactions.instrument, transactions.trade_date, transactions.trade_time, 
     transactions.product, transactions.s_client, transactions.b_client, transactions.s_account, transactions.b_account, transactions.b_trader, 
     transactions.s_trader, transactions.s_commission, transactions.b_commission, transactions.s_idb, transactions.b_idb, transactions.price, transactions.volume,
-    transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.s_tcomm, transactions.b_tcomm, transactions.created_at from transactions
+    transactions.qty, transactions.contract, transactions.year, transactions.deal_id, transactions.s_user, transactions.b_user, transactions.s_tcomm, transactions.b_tcomm, transactions.unit, transactions.created_at from transactions
     ORDER BY trade_id ASC;`;
 
     dbPoolInstance.query(query, (error, result) => {
