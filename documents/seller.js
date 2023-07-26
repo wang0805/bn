@@ -16,7 +16,7 @@ module.exports = (datas) => {
   }
 
   let cal;
-  if (datas.unit === "DAYS"){
+  if (datas.calculation === "&"){
     cal = "%"
   }
   else {
