@@ -106,8 +106,8 @@ module.exports = (datas) => {
                                 <td style="width: 70%; text-align: left">${datas.qty} lots/month</td>
                             </tr>
                             <tr class="item">
-                                <td style="width: 30%; text-align: left">Quantity(MT)</td>
-                                <td style="width: 70%; text-align: left">${size} MT</td>
+                                <td style="width: 30%; text-align: left">Quantity</td>
+                                <td style="width: 70%; text-align: left">${size} ${datas.unit}</td>
                             </tr>
                             <tr class="item">
                                 <td style="width: 30%; text-align: left">Trader</td>
