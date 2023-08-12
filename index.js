@@ -89,7 +89,7 @@ app.post("/sendpdf", (req, res) => {
   //preview in my window
   previewEmail(mailOptions)
     .then(console.log("showing preview"))
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
@@ -128,7 +128,7 @@ app.post("/sendCNpdf", (req, res) => {
   //preview in my window
   previewEmail(mailOptions)
     .then(console.log("showing preview"))
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
@@ -246,7 +246,10 @@ app.post("/createpdf", (req, res) => {
       }
       res.send(Promise.resolve()); //,then in client side
     });
-  } else if (req.body.client[0].entity === "HK" && req.body.client[0].clientid !== 142 ) {
+  } else if (
+    req.body.client[0].entity === "HK" &&
+    req.body.client[0].clientid !== 142
+  ) {
     pdf
       .create(pdfTemplateHk(req.body), optionsHK)
       .toFile("result.pdf", (err) => {
@@ -255,7 +258,8 @@ app.post("/createpdf", (req, res) => {
         }
         res.send(Promise.resolve());
       });
-  } else if (req.body.client[0].clientid === 142) { // this coz client 142 wants Chinese
+  } else if (req.body.client[0].clientid === 142) {
+    // this coz client 142 wants Chinese
     pdf
       .create(pdfTemplateHkChinese(req.body), optionsHK)
       .toFile("result.pdf", (err) => {
@@ -377,12 +381,14 @@ app.post("/createCNpdf", (req, res) => {
   };
 
   if (req.body.client[0].entity === "SG") {
-    pdf.create(pdfTemplateCNSg(req.body), options).toFile("result.pdf", (err) => {
-      if (err) {
-        res.send(Promise.reject());
-      }
-      res.send(Promise.resolve()); //,then in client side
-    });
+    pdf
+      .create(pdfTemplateCNSg(req.body), options)
+      .toFile("result.pdf", (err) => {
+        if (err) {
+          res.send(Promise.reject());
+        }
+        res.send(Promise.resolve()); //,then in client side
+      });
   } else if (req.body.client[0].entity === "HK") {
     pdf
       .create(pdfTemplateCNHk(req.body), optionsHK)
@@ -654,7 +660,7 @@ app.post("/send", async (req, res) => {
       },
     ],
   };
-  console.log(sell_mailOptions["to"], "<Sell", buy_mailOptions["to"], "<buy")
+  console.log(sell_mailOptions["to"], "<Sell", buy_mailOptions["to"], "<buy");
 
   await setTimeout(function () {
     transporter.sendMail(buy_mailOptions, (error, info) => {

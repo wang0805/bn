@@ -117,5 +117,5 @@
 
 -- UPDATE transactions SET unit = 'MT';
 
--- ALTER TABLE transactions ALTER COLUMN s_commission TYPE NUMERIC(7,4)
--- ALTER TABLE transactions ALTER COLUMN b_commission TYPE NUMERIC(7,4)
+-- ALTER TABLE transactions ALTER COLUMN s_commission TYPE NUMERIC(7,4);
+-- ALTER TABLE transactions ALTER COLUMN b_commission TYPE NUMERIC(7,4);
