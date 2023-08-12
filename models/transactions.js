@@ -38,7 +38,7 @@ module.exports = (dbPoolInstance) => {
       obj.volume,
       obj.s_tcomm,
       obj.b_tcomm,
-      obj.unit
+      obj.unit,
     ];
 
     dbPoolInstance.query(query, values, (error, result) => {
@@ -53,7 +53,7 @@ module.exports = (dbPoolInstance) => {
     transactions.s_idb, transactions.b_idb, transactions.price, transactions.qty, transactions.contract, transactions.year, transactions.volume,
     transactions.deal_id, transactions.s_user, transactions.b_user, transactions.s_tcomm, transactions.b_tcomm, transactions.unit, transactions.created_at from transactions 
     ORDER BY trade_id DESC
-    LIMIT 10000;`;
+    LIMIT 8000;`;
 
     dbPoolInstance.query(query, (error, result) => {
       callback(error, result);
